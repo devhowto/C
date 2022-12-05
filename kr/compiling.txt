@@ -1,0 +1,36 @@
+Why `floor` doesn't work / program won't compile?
+
+https://groups.google.com/forum/#!topic/comp.lang.c/KL_u1kvKquY
+
+
+08:27:36  Fernando-Basso | Why do we use -lm (at least with gcc) to link math lib, but not for stdio for
+                         | example?
+08:33:23            kate | Fernando-Basso: just convenience. you can have your compiler not tell the
+                         | linker to link -lc, too. i think a better question is why are libm and libc
+                         | separate on those systems?
+
+
+The important option you missed is -lm.  The floor function is in the
+math library, and -lm says to link the math library code in with your
+program.  (#include <math.h> isn't enough; that tells the compiler
+things like what parameter types it takes and what it returns, but
+doesn't include the actual code for the function.
+
+This is what the line in the man page (`man 3 floor`)
+
+       Link with -lm.
+
+means.
+
+The other options he used tighten down the error and warning reporting
+to better capture any errors in the code.
+
+http://c-faq.com/fp/libm.html
+
+More about -lm, -lc, -lz, -lrt, etc:
+
+    http://stackoverflow.com/questions/7284009/cannot-find-lc-and-lm-in-g-linux
+    http://stackoverflow.com/questions/5663097/gcc-lm-lz-lrt-options-what-are-they-about
+
+
+

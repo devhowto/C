@@ -1,0 +1,6 @@
+= Input Buffer in C
+
+== Problem with scanf() when there is fgets()/gets()/scanf() after it
+
+http://www.geeksforgeeks.org/problem-with-scanf-when-there-is-fgetsgetsscanf-after-it/
+

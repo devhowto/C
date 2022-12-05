@@ -1,0 +1,37 @@
+// Exercise 1-23. Write a program to remove all comments from a C program.
+// Don't forget to handle quoted strings and character constants properly. C
+// comments don't nest.
+
+#include <stdio.h> // Includes the standard INPUT/OUTPUT library.
+#include "lib/helpers.h" /* Includes our own helper functions. */
+
+int main(void)
+{
+    printf(/* cmt1 */"%d" /* cmt2 */ "\n", 10);  /*
+*/
+
+    char* str = "foo \
+                 jedi" /* cmtX */ " \
+                 bar";
+
+    printf("what /* about this */ pal?\n");
+
+    char arr[3] = {'a' /* cmt3 */, 'b', /* cmt4 */ 'c'}; // remove me
+    // Remove ME TOO PLEASE!!!
+
+    char foo = "bar";
+
+    return 0;
+}
+
+/* A multi
+ * line
+ * comment
+*/
+
+// mark ini, mark "end" positions
+// IN  \n OUT
+
+/* IN */ //OUT, but not if IN string.
+
+

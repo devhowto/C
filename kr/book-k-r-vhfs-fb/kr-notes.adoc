@@ -1,0 +1,35 @@
+= The C Programming Language (K&R) Notes
+:source-highlighter: pygments
+:pygments-css: class
+:toc: left
+:toc-title: Index
+:idprefix:
+:toclevels: 6
+:sectlinks:
+:webfonts!:
+:icons: font
+:figure-caption!:
+
+
+== Create Shared Lib
+
+Create the object of the lib:
+
+    gcc -std=c99 -Wall -pedantic -fPIC -o lib/line.o -c ./lib/line.c
+
+Create the shared object:
+
+    gcc -shared -o ./lib/libmyline.so ./lib/line.o
+
+Compile main program with the libs (not that is 'l' 'myline' (without 'lib'):
+
+    gcc -Wall -L./lib -o ./devel devel.c -lmyline
+
+Run te program telling it where the lib is to be found:
+
+    LD_LIBRARY_PATH=./lib ./devel
+
+
+http://stackoverflow.com/questions/3871650/gcc-left-shift-overflow
+
+

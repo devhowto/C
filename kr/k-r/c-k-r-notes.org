@@ -1,0 +1,25 @@
+#+TITLE: The C Programming Languge - Notes
+
+
+
+[[http://www.iso-9899.info/2ediffs.html][K&R 2nd Edition - Errata]]
+
+
+* A tut intro
+
+** 1.8 Arguments - Call (pass) By Value
+
+Function arguments are passed by value. A variable passed to a
+function is a copy. The function can change the value but the original
+variable outside that function is unchanged.
+
+When arrays are passed to a function, then they are like pointers and
+you can change the array inside the function and the change is
+reflected in the array outside that function. We can say arrays are
+_always_ passed by reference; they are pointers.
+
+** 1.9 Character Arrays
+
+
+
+

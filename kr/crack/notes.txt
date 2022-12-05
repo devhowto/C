@@ -1,0 +1,20 @@
+= Cracking Binaries
+
+
+1. https://rodolfo.io/2016/02/cracking-binary-files-using-vim-and-some-linux-tools/
+
+
+    objdump -d program | vim -
+    objdump -d program > tmp.txt
+
+
+    :help 23.4
+
+
+    vim -b binaryfile
+    :%!xxd
+    ... some edits ...
+    :%!xxd -r
+    :wq
+
+

@@ -1,0 +1,33 @@
+
+https://www.youtube.com/watch?v=muX0ypoeTCc&list=PLT6WFYYZE6uLMcPGS3qfpYm7T_gViYMMt&index=7
+
+gcc -std=c99 -W -Wall -pedantic main.c `sdl2-config --libs -lSDL2` -o main
+
+
+    #include <SDL2/SDL.h>
+
+
+
+Does NOT work:
+
+    gcc $(sdl2-config --cflags --libs) -std=c99 -W -Wall -pedantic main.c -o bin/main
+
+
+Does NOT work:
+
+    gcc `sdl2-config --cflags --libs` -std=c99 -W -Wall -pedantic main.c -o bin/main
+
+
+
+WORKS (changing order of parameters):
+
+    gcc -o bin/main main.c `sdl2-config --cflags --libs`
+
+or
+
+    gcc -o bin/main main.c `sdl2-config --cflags --libs` -std=c99 -W -Wall -pedantic
+
+
+
+
+

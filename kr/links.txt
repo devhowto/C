@@ -1,0 +1,27 @@
+== K&R
+
+http://clc-wiki.net/wiki/K%26R2_solutions
+
+----------------------------------------------------------------------------------------------------
+http://www.cprogramming.com/tutorial/unicode.html
+
+https://en.wikipedia.org/wiki/C_string_handling
+
+https://www.quora.com/How-do-I-learn-pointers-in-C-C++
+
+http://cslibrary.stanford.edu/110/BinaryTrees.html
+
+http://cslibrary.stanford.edu/105/
+
+
+Beginner C Tutorials (50+ videos).
+https://www.youtube.com/playlist?list=PLD05642AD0D531E1B
+
+
+== Cool Stuff
+
+ASCII fluid
+https://www.youtube.com/watch?v=QMYfkOtYYlg
+http://www.ioccc.org/2012/endoh1/hint.html
+
+

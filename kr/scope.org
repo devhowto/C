@@ -1,0 +1,45 @@
+#+TITLE: Scope in C
+
+* while loop
+
+A loop. Prints from 1 to 4 and then breaks. Note that we declare ~i~
+outside the ~while~ block.
+
+#+BEGIN_SRC c
+int i = 1;
+while (1) {
+  printf("Num: %d\n", i);
+  ++i;
+  if (i == 5) {
+    break;
+  }
+ }
+#+END_SRC
+
+** Infinite Loop
+
+Produces an infinite loop.
+
+#+BEGIN_SRC c
+while (1) {
+  int i = 1;
+  printf("Num: %d\n", i);
+  ++i;
+  if (i == 5) {
+    break;
+  }
+ }
+#+END_SRC
+
+Because (see [[http://stackoverflow.com/questions/7741842/confuse-with-variable-scope-for-while-and-for-loopc-programming][this]]) ~i~ inside the ~while~ is recreated in every iteration
+of the loop. Note that we declared ~i~ inside the loop, not just before
+starting it. Therefore, on every iteration of the loop, ~i~ is
+initialized to 1, then incremented to 2, the ~if~ condition is not
+satisfied, and the ~while~ loop starts again, initializing ~i~ to 1 again,
+incremented to 2, the ~if~ condition is not met, the loops starts again,
+and so on and so forth and therefore ~i~ never gets to the point where
+its value is equal to 5, and thus the infinite loop.
+
+
+
+

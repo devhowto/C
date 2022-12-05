@@ -1,0 +1,1194 @@
+Table of Contents
+─────────────────
+
+1 Tracking
+2 Errata
+3 WORKING [5/10] CHAPTER 1: A Tutorial Introduction
+.. 3.1 DONE 1.1 Getting Started
+.. 3.2 DONE 1.2 TODO vars arithmetic exprs
+.. 3.3 DONE 1.3 The For Statement
+.. 3.4 DONE 1.4 Symbolic Constants
+..... 3.4.1 Block scope
+.. 3.5 DONE 1.5 Character Input and Output
+..... 3.5.1 DONE 1.5.1 File Copying
+..... 3.5.2 DONE Operational Operators Precedence
+..... 3.5.3 DONE 1.5.2 Character Counting
+..... 3.5.4 DONE 1.5.3 Line Counting
+..... 3.5.5 DONE 1.5.4 Word Counting
+..... 3.5.6 Exercises
+.. 3.6 WORKING 1.6 Arrays
+.. 3.7 TODO 1.7 Functions
+.. 3.8 TODO 1.8 Arguments—Call by Value
+.. 3.9 TODO 1.9 Character Arrays
+.. 3.10 TODO 1.10 External Variables and Scope
+4 TODO [0/12] CHAPTER 2: Types, Operators, and Expressions
+.. 4.1 TODO 2.1 Variable Names
+.. 4.2 TODO 2.2 Data Types and Sizes
+.. 4.3 TODO 2.3 Constants
+.. 4.4 TODO 2.4 Declarations
+.. 4.5 TODO 2.5 Arithmetic Operators
+.. 4.6 TODO 2.6 Relational and Logical Operators
+.. 4.7 TODO 2.7 Type Conversions
+.. 4.8 TODO 2.8 Increment and Decrement Operators
+.. 4.9 TODO 2.9 Bitwise Operators
+.. 4.10 TODO 2.10 Assignment Operators and Expressions
+.. 4.11 TODO 2.11 Conditional Expressions
+.. 4.12 TODO 2.12 Precedence and Order of Evaluation
+5 TODO [0/8] CHAPTER 3: Control Flow
+.. 5.1 TODO 3.1 Statements and Blocks
+.. 5.2 TODO 3.2 If-Else
+.. 5.3 TODO 3.3 Else-If
+.. 5.4 TODO 3.4 Switch
+.. 5.5 TODO 3.5 Loops—While and For
+.. 5.6 TODO 3.6 Loops—Do-while
+.. 5.7 TODO 3.7 Break and Continue
+.. 5.8 TODO 3.8 Goto and Labels
+6 TODO [0/11] CHAPTER 4: Functions and Program Structure
+.. 6.1 TODO 4.1 Basics of Functions
+.. 6.2 TODO 4.2 Functions Returning Non-integers
+.. 6.3 TODO 4.3 External Variables
+.. 6.4 TODO 4.4 Scope Rules
+.. 6.5 TODO 4.5 Header Files
+.. 6.6 TODO 4.6 Static Variables
+.. 6.7 TODO 4.7 Register Variables
+.. 6.8 TODO 4.8 Block Structure
+.. 6.9 TODO 4.9 Initialization
+.. 6.10 TODO 4.10 Recursion
+.. 6.11 TODO 4.11 The C Preprocessor
+7 TODO [0/12] CHAPTER 5: Pointers and Arrays
+.. 7.1 TODO 5.1 Pointers and Addresses
+.. 7.2 TODO 5.2 Pointers and Function Arguments
+.. 7.3 TODO 5.3 Pointers and Arrays
+.. 7.4 TODO 5.4 Address Arithmetic
+.. 7.5 TODO 5.5 Character Pointers and Functions
+.. 7.6 TODO 5.6 Pointer Arrays; Pointers to Pointers
+.. 7.7 TODO 5.7 Multi-dimensional Arrays
+.. 7.8 TODO 5.8 Initialization of Pointer Arrays
+.. 7.9 TODO 5.9 Pointers vs. Multi-dimensional Arrays
+.. 7.10 TODO 5.10 Command-line Arguments
+.. 7.11 TODO 5.11 Pointers to Functions
+.. 7.12 TODO 5.12 Complicated Declarations
+8 TODO [0/9] CHAPTER 6: Structures
+.. 8.1 TODO 6.1 Basics of Structures
+.. 8.2 TODO 6.2 Structures and Functions
+.. 8.3 TODO 6.3 Arrays of Structures
+.. 8.4 TODO 6.4 Pointers to Structures
+.. 8.5 TODO 6.5 Self-referential Structures
+.. 8.6 TODO 6.6 Table Lookup
+.. 8.7 TODO 6.7 Typedef
+.. 8.8 TODO 6.8 Unions
+.. 8.9 TODO 6.9 Bit-fields
+9 TODO [0/8] CHAPTER 7: Input and Output
+.. 9.1 TODO 7.1 Standard Input and Output
+.. 9.2 TODO 7.2 Formatted Output—Printf
+.. 9.3 TODO 7.3 Variable-length Argument Lists
+.. 9.4 TODO 7.4 Formatted Input—Scanf
+.. 9.5 TODO 7.5 File Access
+.. 9.6 TODO 7.6 Error Handling—Stderr and Exit
+.. 9.7 TODO 7.7 Line Input and Output
+.. 9.8 TODO 7.8 Miscellaneous Functions
+10 TODO [0/7] CHAPTER 8: The UNIX System Interface
+.. 10.1 TODO 8.1 File Descriptors
+.. 10.2 TODO 8.2 Low Level I/O—Read and Write
+.. 10.3 TODO 8.3 Open, Creat, Close, Unlink
+.. 10.4 TODO 8.4 Random Access—Lseek
+.. 10.5 TODO 8.5 Example—An Implementation of Fopen and Getc
+.. 10.6 TODO 8.6 Example—Listing Directories
+.. 10.7 TODO 8.7 Example—A Storage Allocator
+11 TODO [0/12] APPENDIX A: Reference Manual
+.. 11.1 TODO A2. Lexical Conventions
+.. 11.2 TODO A3. Syntax Notation
+.. 11.3 TODO A4. Meaning of Identifiers
+.. 11.4 TODO A5. Objects and Lvalues
+.. 11.5 TODO A6. Conversions
+.. 11.6 TODO A7. Expressions
+.. 11.7 TODO A8. Declarations
+.. 11.8 TODO A9. Statements
+.. 11.9 TODO A10. External Declarations
+.. 11.10 TODO A11. Scope and Linkage
+.. 11.11 TODO A12. Preprocessing
+.. 11.12 TODO A13. Grammar
+12 TODO [0/11] APPENDIX B: Standard Library
+.. 12.1 TODO B1. Input and Output: <stdio.h>
+.. 12.2 TODO B2. Character Class Tests: <ctype.h>
+.. 12.3 TODO B3. String Functions: <string.h>
+.. 12.4 TODO B4. Mathematical Functions: <math.h>
+.. 12.5 TODO B5. Utility Functions: <stdlib.h>
+.. 12.6 TODO B6. Diagnostics: <assert.h>
+.. 12.7 TODO B7. Variable Argument Lists: <stdarg.h>
+.. 12.8 TODO B8. Non-local Jumps: <setjmp.h>
+.. 12.9 TODO B9. Signals: <signal.h>
+.. 12.10 TODO B10. Date and Time Functions: <time.h>
+.. 12.11 TODO B11. Implementation-defined Limits: <limits.h> and <float.h>
+
+
+#+TITLE K&R Notes
+
+
+1 Tracking
+══════════
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Date              Time Studied
+  ────────────────────────────────
+   <2016-11-22 Tue>         02:30
+   <2016-11-23 Wed>         01:00
+   <2016-11-25 Fri>         02:00
+   <2016-11-30 Wed>         02:00
+   <2016-12-02 Fri>         01:50
+   <2016-12-07 Wed>   start: 9:30
+
+   …
+   Total Time            09:20:00
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+2 Errata
+════════
+
+  [http://www.bien-programmer.fr/2ediffs.html]
+
+
+3 WORKING [5/10] CHAPTER 1: A Tutorial Introduction
+═══════════════════════════════════════════════════
+
+  One method of communicating data between functions is for the calling
+  function to provide a list of values, called arguments, to the
+  function it calls.
+
+  A sequence of characters in double quotes, like "hello, world\n" , is
+  called a character string or string constant.
+
+  printfnever supplies a newline character automatically.
+
+  18:53:16 +Nistur | Ok, what kind of fucking screws do I need for this
+  fucking case?  18:53:26 +barcelona1937 | the fucking ones 18:53:30
+  +barcelona1937 | clearly
+
+
+3.1 DONE 1.1 Getting Started
+────────────────────────────
+
+
+3.2 DONE 1.2 TODO vars arithmetic exprs
+───────────────────────────────────────
+
+  ┌────
+  │ TODO C=(5/9)( o F-32)
+  └────
+
+
+  C, TODO as in many other languages, integer division truncates: any
+  fractional part is discarded. Since 5 and 9 are integers. 5/9 would be
+  truncated to zero and so all the Celsius temperatures would TODO be
+  reported as zero.
+
+  5 TODO is a constant.
+
+  If TODO an arithmetic operator has integer operands, an integer
+  operation is performed. If an arithmetic TODO operator has one
+  floating-point operand and one integer operand, however, the integer
+  TODO will be converted to floating point before the operation is
+  done. If we had written (fahr-32) TODO , the 32 would be automatically
+  converted to floating point.
+
+  ┌────
+  │ printf("%6.2f\n", 1.234);
+  │   1.23
+  └────
+
+  So, TODO 6 means, 2 spaces of padding, 1, the dot, and the two decimal
+  places, which means the 6 counts everything.  1.23 TODO are four
+  characters. Then, just padd 2 spaces on the left.
+
+  \% TODO is not %, but %% is %.
+
+  printf("%15s\t%15s\n", "Fahrenheit", "Celsius") e é imprimido um único
+  espaço no lugar do \t? Por que?
+
+  ┌────
+  │ 09:30:04  Fernando-Basso | I have printf("%15s\t%15s\n", "Fahrenheit", "Celcius");, and it
+  │                          | prints one space for \t.
+  │ 09:30:07  Fernando-Basso | Why?
+  │ 09:31:30    Love4Boobies | What do you expect it to print?
+  │ 09:32:11  Fernando-Basso | \t to print 8 spaces, or 4, but not 1 space.
+  │ 09:32:26          mi6x3m | Fernando-Basso: What do you print to? The console?
+  │ 09:32:41  Fernando-Basso | Yep, urxvt, tmux.
+  │ 09:33:01          mi6x3m | well \t is not a displayable character, it's a control character.
+  │ 09:33:09          mi6x3m | your output environment interprets it as 1 space
+  │ 09:33:11    Love4Boobies | Fernando-Basso: A tab is usually rendered as space up to the next
+  │                          | tabstop, not as a fixed number of spaces.
+  │ 09:33:58    Love4Boobies | In this case, the tabsop is likely 8 so the next tabstop would be
+  │                          | at 16---meaning you are one space away from it.
+  │ 09:35:32    Love4Boobies | Note that you may very well be able to configure your terminal to
+  │                          | have a tabstop every 3 characters, say.
+  └────
+
+
+3.3 DONE 1.3 The For Statement
+──────────────────────────────
+
+  [file:./examples/chap01/04-fahr-cels-for.c]
+  ┌────
+  │ // Print Fahrenheit - Celsius table.
+  │
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int fahr;
+  │
+  │     for (fahr = 0; fahr <= 300; fahr = fahr + 20)
+  │         printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
+  │
+  │     return 0;
+  │ }
+  └────
+
+  In any context where it is permissible to usethe value of some type,
+  you can use a more complicated expression of that type (that results
+  in a value of that type).
+
+
+3.4 DONE 1.4 Symbolic Constants
+───────────────────────────────
+
+  ┌────
+  │ #define <name> <replacement list>
+  └────
+
+  There is no semicolon at the end! Thereafter, any occurrence of name
+  (not in quotes and not part of another name) will be *replaced* by the
+  corresponding replacement text.
+
+  [file:./examples/chap01/05-symbconst.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ #define LOWER 0         // Lower limit of the table.
+  │ #define UPPER 300       // Upper limit.
+  │ #define STEP 20         // Step size.
+  │
+  │ int main(void)
+  │ {
+  │     int fahr;
+  │
+  │     for (fahr = LOWER; fahr <= UPPER; fahr = fahr + STEP) {
+  │         printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
+  │     }
+  │
+  │     return 0;
+  │ }
+  └────
+
+  Symbolic constants are /not/ variables. And remember, *no semicolon at
+  the end of the define line*.
+
+
+3.4.1 Block scope
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  If you declare a variable outside the loop, it is acessible inside the
+  loop. If, however, you declare it inside the block, then you cannot
+  access it from outside the block.
+
+  ┌────
+  │ int main(void)
+  │ {
+  │     int i; // declare i
+  │     int z; // declare z
+  │
+  │     // i is accessible inside for, declared outside.
+  │     for (i = 0; i < 2; i += 1) {
+  │         // z is also accessed here, no problem.
+  │         // z was declared outside the block.
+  │         z = 10;
+  │
+  │         // Declared inside the block, can't be used outside.
+  │         int k = 5;
+  │     }
+  │
+  │     printf("%d\n", i); // → 2.
+  │     printf("%d\n", z); // → 10.
+  │     printf("%d\n", k); // → Error. ‘k’ is does not exist in this scope.
+  │
+  │     return 0;
+  │ }
+  └────
+
+
+3.5 DONE 1.5 Character Input and Output
+───────────────────────────────────────
+
+  A *text stream* is a sequence of characters divided into lines; each
+  line consists of zero or more characters followed by a newline
+  character.
+
+  `getchar' is the same as `getc(stdin)' (read `man 3 getc').
+
+  `getchar' reads the character as its `int' value. `putchar' prints the
+  int value as a character.
+
+
+3.5.1 DONE 1.5.1 File Copying
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  `EOF' is defined in `stdio.h', and it is -1 on my system.
+
+  `!=' is a [relational operator].
+
+  Is the type `char' an unsigned small int (greater than zero)?
+
+  [file:./examples/chap01/06-getchar-while.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int c;
+  │
+  │     c = getchar();
+  │
+  │     while (c != EOF) {
+  │         putchar(c);
+  │         c = getchar();
+  │     }
+  │
+  │     return 0;
+  │ }
+  └────
+
+
+[relational operator] https://en.wikipedia.org/wiki/Relational_operator
+
+
+3.5.2 DONE Operational Operators Precedence
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  `!=' has higher precedence than `='.
+
+  ┌────
+  │ c = getchar() != EOF
+  └────
+
+  is equivalent to
+
+  ┌────
+  │ c = (getchar() != EOF)
+  └────
+
+  which has the undesired effect of setting c to 0 or 1, depending on
+  whether or not the call of getchar returned end of file.Therefore, you
+  generally want
+
+  ┌────
+  │ (c = getchar()) != EOF
+  └────
+
+  [file:./examples/chap01/07-getchar-while-v2.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int c;
+  │
+  │     c = getchar();
+  │
+  │     while ((c = getchar()) != EOF)
+  │         putchar(c);
+  │
+  │     return 0;
+  │ }
+  └────
+
+  0 is false is 1 is truthy.
+
+
+3.5.3 DONE 1.5.2 Character Counting
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  ++ and – can be used as prefix and postfix operators (but not as infix
+  operators).
+
+  Use `%ld' to printf a long int.
+
+  `printf' uses `%f' for both `float' and `double'.
+
+  If a `for' loop doesn't need a real block, one can use a *null
+  statement*.
+
+  ┌────
+  │ for (nc = 0; getchar() != EOF; ++nc)
+  │     ;
+  └────
+
+  Note the lone semicolon.
+
+  [file:/examples/chap01/08-char-count-while.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │
+  │     long nc;
+  │
+  │     nc = 0;
+  │     while (getchar() != EOF)
+  │         ++nc;
+  │
+  │     printf("Number or characters read: %ld\n", nc);
+  │
+  │     // heyRET is 4 chars (hey + newline)
+  │     // àRET is 3 chars...
+  │     // Also, newline is not EOF.
+  │
+  │     // If no input is given (only a C-d), zero is the result,
+  │     // which is the correct answer.
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:/examples/chap01/09-char-count-for.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │
+  │     double nc;
+  │
+  │     for (nc = 0; getchar() != EOF; ++nc)
+  │         ;
+  │
+  │     printf("Number or characters read: %0.f\n", nc);
+  │
+  │     // heyRET is 4 chars (hey + newline)
+  │     // àRET is 3 chars...
+  │     // Also, newline is not EOF.
+  │
+  │     return 0;
+  │ }
+  └────
+
+
+3.5.4 DONE 1.5.3 Line Counting
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  The standard library ensures that an input text stream appears as a
+  sequence of lines, each terminated by a newline. Hence, counting lines
+  is just counting newlines.
+
+  [file:./examples/chap01/10-count-lines.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ /* count lines in input */
+  │ int main(void)
+  │ {
+  │     int c, nl;
+  │
+  │     nl = 0;
+  │     while ((c = getchar()) != EOF)
+  │         if (c == '\n')
+  │             ++nl;
+  │
+  │     fprintf(stdout, "%d\n", nl);
+  │
+  │     return 0;
+  │ }
+  │
+  │ //
+  │ // NOTE: We hit Ctrl+D to signal EOF when testing from the terminal,
+  │ // but if reading from a file, for instance, EOF happens when there
+  │ // are no more lines to read from the file.
+  │ //
+  └────
+
+  Careful not to use a single `=' when you intend to use `==', because
+  in a test, `foo = bar' is a valid expression.
+
+  'a' (single quotes) is a *character constant* and its value is the
+  integer that represent "a" in the machine's character set.
+
+  [file:./other/02-charconst.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int n;
+  │
+  │     for (n = 'a'; n <= 'z'; ++n)
+  │         fprintf(stdout, "%c", n);
+  │     return 0;
+  │ }
+  │
+  │ //
+  │ // NOTE: We hit Ctrl+D to signal EOF when testing from the terminal,
+  │ // but if reading from a file, for instance, EOF happens when there
+  │ // are no more lines to read from the file.
+  │ //
+  └────
+
+  Escape sequences (`\n', `\t', etc) worth both inside single and double
+  quotes, and count as a single character [1]
+
+
+◊ 3.5.4.1 Errata
+
+  Page 22
+
+  "…on the other hand, '\n' is a string constant that happens to contain
+  only one character."
+
+  Note that they use single quotes in '\n'. They probably meant "\n"
+  (double quotes).
+
+  Exercise 1-8, 1-9, 1-10.
+
+
+3.5.5 DONE 1.5.4 Word Counting
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  Associates from right to left, so, this is not special syntax.
+  ┌────
+  │ nl = nw = nc = 0;
+  └────
+
+  `&&' is higher precedence than `||'.
+
+  [file:./examples/chap01/11-word-count.c]
+  ┌────
+  │ #include <stdio.h>
+  │
+  │ #define IN      1 // inside a word
+  │ #define OUT     0 // outside a word
+  │
+  │ /**
+  │  * Count lines, words and characters in input.
+  │  */
+  │ int main(void)
+  │ {
+  │     int c, nl, nw, nc, state;
+  │
+  │     state = OUT;
+  │     nl = nw = nc = 0;
+  │     while ((c = getchar()) != EOF) {
+  │         ++nc;
+  │         if (c == '\n') {
+  │             ++nl;
+  │         }
+  │         if (c == ' ' || c == '\n' || c == '\t') {
+  │             state = OUT;
+  │         }
+  │         else if (state == OUT) {
+  │             state = IN;
+  │             ++nw;
+  │         }
+  │     }
+  │
+  │     fprintf(stdout, "%d %d %d\n", nl, nw, nc);
+  │
+  │     return 0;
+  │ }
+  └────
+
+
+3.5.6 Exercises
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  [file:./exercises/chap01/05-fahr-cels-for-rev.c]
+  ┌────
+  │ //
+  │ // Exercise 1-5. Modify the temperature conversion program to print the table
+  │ // in reverse order, that is, from 300 degrees to 0.
+  │ //
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int fahr;
+  │
+  │     for (fahr = 300; fahr >= 0; fahr = fahr - 20)
+  │         printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:./exercises/chap01/06-getchar-eof-comp.c]
+  ┌────
+  │ // Exercsise 0-6. Verify that the expression getchar() != EOF is 0 or 1.
+  │
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │
+  │     int c;
+  │     c = getchar() != EOF;
+  │
+  │     printf("%d\n", c);
+  │     // 0 if it is EOF (we used !=).
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:./exercises/chap01/07-value-of-eof.c]
+  ┌────
+  │ // Exercise 1-7. Write a program to print the value of EOF.
+  │
+  │ // NOTE: On vim, with the cursor on <stdio.h>, hit `gf` and
+  │ // search for EOF.
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │
+  │     printf("%d\n", EOF);
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:./exercises/chap01/08-count-whitespace.c]
+  ┌────
+  │ // Exercise 1-8. Write a program to count blanks, tabs, and newlines.
+  │
+  │ // It seems they mean to count everything together, not as separate counters.
+  │
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int c, count;
+  │
+  │     count = 0;
+  │
+  │     while ((c = getchar()) != EOF)
+  │         if (c == ' ' || c == '\t' || c == '\n')
+  │             ++count;
+  │
+  │     fprintf(stdout, "Total count: %d\n", count);
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:./exercises/chap01/09-squeeze-blanks.c]
+  ┌────
+  │ // Exercise 1-9. Write a program to copy its input to its output, replacing
+  │ // each string of one or more blanks by a single blank.
+  │
+  │ #include <stdio.h>
+  │
+  │ #define TRUE 1
+  │ #define FALSE 0
+  │
+  │ int main(void)
+  │ {
+  │     int c, is_blank;
+  │
+  │     is_blank = FALSE;
+  │
+  │     while ((c = getchar()) != EOF) {
+  │         if (c == ' ') {
+  │             if (is_blank == FALSE) {
+  │                 putchar(c);
+  │             }
+  │             is_blank = TRUE;
+  │         }
+  │         else {
+  │             putchar(c);
+  │             is_blank = FALSE;
+  │         }
+  │     }
+  │
+  │     return 0;
+  │ }
+  └────
+
+  [file:f/exercises/chap01/10-visual-control-chars.c]
+  ┌────
+  │ // Exercise 1-10. Write a program to copy its input to its output, replacing each
+  │ // tab by \t , each backspace by \b , and each backslash by \\ . This makes tabs
+  │ // and backspaces visible in an unambiguous way.
+  │
+  │ #include <stdio.h>
+  │
+  │ int main(void)
+  │ {
+  │     int c;
+  │
+  │     while ((c = getchar()) != EOF) {
+  │         if (c == '\t')
+  │             fprintf(stdout, "\\t");
+  │         else if (c == '\b')
+  │             fprintf(stdout, "\\b");
+  │         else if (c == '\\')
+  │             fprintf(stdout, "\\");
+  │         else
+  │             fprintf(stdout, "%c", c);
+  │     }
+  │
+  │     return 0;
+  │ }
+  │
+  │ // \b can be inserted by hitting Ctrl+Backspace or Ctrl+h.
+  └────
+
+  1-11: files very lager that would overflow the variables, corrupt
+  data.
+
+  [file:./exercises/chap01/12-word-per-line.c]
+  ┌────
+  │ // Exercise 1-12. Write a program that prints its input one word per line.
+  │
+  │ #include <stdio.h>
+  │
+  │ #define BLANK 1
+  │ #define NON_BLANK 0
+  │
+  │ int main(void)
+  │ {
+  │     int c, prev;
+  │
+  │     prev = NON_BLANK;
+  │     while ((c = getchar()) != EOF) {
+  │         if (c == ' ' || c == '\n' || c == '\t') {
+  │             if (prev == NON_BLANK) {
+  │                 putchar('\n');
+  │             }
+  │             prev = BLANK;
+  │         }
+  │         else {
+  │             prev = NON_BLANK;
+  │             putchar(c);
+  │         }
+  │     }
+  │
+  │     return 0;
+  │ }
+  └────
+
+
+3.6 WORKING 1.6 Arrays
+──────────────────────
+
+
+3.7 TODO 1.7 Functions
+──────────────────────
+
+
+3.8 TODO 1.8 Arguments—Call by Value
+────────────────────────────────────
+
+
+3.9 TODO 1.9 Character Arrays
+─────────────────────────────
+
+
+3.10 TODO 1.10 External Variables and Scope
+───────────────────────────────────────────
+
+
+4 TODO [0/12] CHAPTER 2: Types, Operators, and Expressions
+══════════════════════════════════════════════════════════
+
+4.1 TODO 2.1 Variable Names
+───────────────────────────
+
+
+4.2 TODO 2.2 Data Types and Sizes
+─────────────────────────────────
+
+
+4.3 TODO 2.3 Constants
+──────────────────────
+
+
+4.4 TODO 2.4 Declarations
+─────────────────────────
+
+
+4.5 TODO 2.5 Arithmetic Operators
+─────────────────────────────────
+
+
+4.6 TODO 2.6 Relational and Logical Operators
+─────────────────────────────────────────────
+
+
+4.7 TODO 2.7 Type Conversions
+─────────────────────────────
+
+
+4.8 TODO 2.8 Increment and Decrement Operators
+──────────────────────────────────────────────
+
+
+4.9 TODO 2.9 Bitwise Operators
+──────────────────────────────
+
+
+4.10 TODO 2.10 Assignment Operators and Expressions
+───────────────────────────────────────────────────
+
+
+4.11 TODO 2.11 Conditional Expressions
+──────────────────────────────────────
+
+
+4.12 TODO 2.12 Precedence and Order of Evaluation
+─────────────────────────────────────────────────
+
+
+5 TODO [0/8] CHAPTER 3: Control Flow
+════════════════════════════════════
+
+5.1 TODO 3.1 Statements and Blocks
+──────────────────────────────────
+
+
+5.2 TODO 3.2 If-Else
+────────────────────
+
+
+5.3 TODO 3.3 Else-If
+────────────────────
+
+
+5.4 TODO 3.4 Switch
+───────────────────
+
+
+5.5 TODO 3.5 Loops—While and For
+────────────────────────────────
+
+
+5.6 TODO 3.6 Loops—Do-while
+───────────────────────────
+
+
+5.7 TODO 3.7 Break and Continue
+───────────────────────────────
+
+
+5.8 TODO 3.8 Goto and Labels
+────────────────────────────
+
+
+6 TODO [0/11] CHAPTER 4: Functions and Program Structure
+════════════════════════════════════════════════════════
+
+6.1 TODO 4.1 Basics of Functions
+────────────────────────────────
+
+
+6.2 TODO 4.2 Functions Returning Non-integers
+─────────────────────────────────────────────
+
+
+6.3 TODO 4.3 External Variables
+───────────────────────────────
+
+
+6.4 TODO 4.4 Scope Rules
+────────────────────────
+
+
+6.5 TODO 4.5 Header Files
+─────────────────────────
+
+
+6.6 TODO 4.6 Static Variables
+─────────────────────────────
+
+
+6.7 TODO 4.7 Register Variables
+───────────────────────────────
+
+
+6.8 TODO 4.8 Block Structure
+────────────────────────────
+
+
+6.9 TODO 4.9 Initialization
+───────────────────────────
+
+
+6.10 TODO 4.10 Recursion
+────────────────────────
+
+
+6.11 TODO 4.11 The C Preprocessor
+─────────────────────────────────
+
+
+7 TODO [0/12] CHAPTER 5: Pointers and Arrays
+════════════════════════════════════════════
+
+7.1 TODO 5.1 Pointers and Addresses
+───────────────────────────────────
+
+
+7.2 TODO 5.2 Pointers and Function Arguments
+────────────────────────────────────────────
+
+
+7.3 TODO 5.3 Pointers and Arrays
+────────────────────────────────
+
+
+7.4 TODO 5.4 Address Arithmetic
+───────────────────────────────
+
+
+7.5 TODO 5.5 Character Pointers and Functions
+─────────────────────────────────────────────
+
+
+7.6 TODO 5.6 Pointer Arrays; Pointers to Pointers
+─────────────────────────────────────────────────
+
+
+7.7 TODO 5.7 Multi-dimensional Arrays
+─────────────────────────────────────
+
+
+7.8 TODO 5.8 Initialization of Pointer Arrays
+─────────────────────────────────────────────
+
+
+7.9 TODO 5.9 Pointers vs. Multi-dimensional Arrays
+──────────────────────────────────────────────────
+
+
+7.10 TODO 5.10 Command-line Arguments
+─────────────────────────────────────
+
+
+7.11 TODO 5.11 Pointers to Functions
+────────────────────────────────────
+
+
+7.12 TODO 5.12 Complicated Declarations
+───────────────────────────────────────
+
+
+8 TODO [0/9] CHAPTER 6: Structures
+══════════════════════════════════
+
+8.1 TODO 6.1 Basics of Structures
+─────────────────────────────────
+
+
+8.2 TODO 6.2 Structures and Functions
+─────────────────────────────────────
+
+
+8.3 TODO 6.3 Arrays of Structures
+─────────────────────────────────
+
+
+8.4 TODO 6.4 Pointers to Structures
+───────────────────────────────────
+
+
+8.5 TODO 6.5 Self-referential Structures
+────────────────────────────────────────
+
+
+8.6 TODO 6.6 Table Lookup
+─────────────────────────
+
+
+8.7 TODO 6.7 Typedef
+────────────────────
+
+
+8.8 TODO 6.8 Unions
+───────────────────
+
+
+8.9 TODO 6.9 Bit-fields
+───────────────────────
+
+
+9 TODO [0/8] CHAPTER 7: Input and Output
+════════════════════════════════════════
+
+9.1 TODO 7.1 Standard Input and Output
+──────────────────────────────────────
+
+
+9.2 TODO 7.2 Formatted Output—Printf
+────────────────────────────────────
+
+
+9.3 TODO 7.3 Variable-length Argument Lists
+───────────────────────────────────────────
+
+
+9.4 TODO 7.4 Formatted Input—Scanf
+──────────────────────────────────
+
+
+9.5 TODO 7.5 File Access
+────────────────────────
+
+
+9.6 TODO 7.6 Error Handling—Stderr and Exit
+───────────────────────────────────────────
+
+
+9.7 TODO 7.7 Line Input and Output
+──────────────────────────────────
+
+
+9.8 TODO 7.8 Miscellaneous Functions
+────────────────────────────────────
+
+
+10 TODO [0/7] CHAPTER 8: The UNIX System Interface
+══════════════════════════════════════════════════
+
+10.1 TODO 8.1 File Descriptors
+──────────────────────────────
+
+
+10.2 TODO 8.2 Low Level I/O—Read and Write
+──────────────────────────────────────────
+
+
+10.3 TODO 8.3 Open, Creat, Close, Unlink
+────────────────────────────────────────
+
+
+10.4 TODO 8.4 Random Access—Lseek
+─────────────────────────────────
+
+
+10.5 TODO 8.5 Example—An Implementation of Fopen and Getc
+─────────────────────────────────────────────────────────
+
+
+10.6 TODO 8.6 Example—Listing Directories
+─────────────────────────────────────────
+
+
+10.7 TODO 8.7 Example—A Storage Allocator
+─────────────────────────────────────────
+
+
+11 TODO [0/12] APPENDIX A: Reference Manual
+═══════════════════════════════════════════
+
+  A1. TODO Introduction
+
+
+11.1 TODO A2. Lexical Conventions
+─────────────────────────────────
+
+
+11.2 TODO A3. Syntax Notation
+─────────────────────────────
+
+
+11.3 TODO A4. Meaning of Identifiers
+────────────────────────────────────
+
+
+11.4 TODO A5. Objects and Lvalues
+─────────────────────────────────
+
+
+11.5 TODO A6. Conversions
+─────────────────────────
+
+
+11.6 TODO A7. Expressions
+─────────────────────────
+
+
+11.7 TODO A8. Declarations
+──────────────────────────
+
+
+11.8 TODO A9. Statements
+────────────────────────
+
+
+11.9 TODO A10. External Declarations
+────────────────────────────────────
+
+
+11.10 TODO A11. Scope and Linkage
+─────────────────────────────────
+
+
+11.11 TODO A12. Preprocessing
+─────────────────────────────
+
+
+11.12 TODO A13. Grammar
+───────────────────────
+
+
+12 TODO [0/11] APPENDIX B: Standard Library
+═══════════════════════════════════════════
+
+12.1 TODO B1. Input and Output: <stdio.h>
+─────────────────────────────────────────
+
+
+12.2 TODO B2. Character Class Tests: <ctype.h>
+──────────────────────────────────────────────
+
+
+12.3 TODO B3. String Functions: <string.h>
+──────────────────────────────────────────
+
+
+12.4 TODO B4. Mathematical Functions: <math.h>
+──────────────────────────────────────────────
+
+
+12.5 TODO B5. Utility Functions: <stdlib.h>
+───────────────────────────────────────────
+
+
+12.6 TODO B6. Diagnostics: <assert.h>
+─────────────────────────────────────
+
+
+12.7 TODO B7. Variable Argument Lists: <stdarg.h>
+─────────────────────────────────────────────────
+
+
+12.8 TODO B8. Non-local Jumps: <setjmp.h>
+─────────────────────────────────────────
+
+
+12.9 TODO B9. Signals: <signal.h>
+─────────────────────────────────
+
+
+12.10 TODO B10. Date and Time Functions: <time.h>
+─────────────────────────────────────────────────
+
+
+12.11 TODO B11. Implementation-defined Limits: <limits.h> and <float.h>
+───────────────────────────────────────────────────────────────────────
+
+
+
+Footnotes
+─────────
+
+[1] The C Programming Language, page 22. The use '\n' in single quote,
+where they probably meant "\n" in double quote.

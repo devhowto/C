@@ -1,0 +1,149 @@
+
+
+GDB - GNU Debugger
+------------------
+
+
+
+https://www.hackerschool.com/blog/5-learning-c-with-gdb
+
+http://beej.us/guide/bggdb/
+
+
+Basic
+-----
+
+Type
+
+    info gdb
+
+or from Emacs,
+
+    C-h i m gdb<RET>
+
+Run the program through gdb:
+
+    gdb /path/to/program
+    set width 70
+    break m4_changequote
+    run
+
+To trigger the breakpoint, call the function:
+
+  changequote( <QUOTE>, <UNQUOTE> )
+
+Advance execution to the next line of the current function:
+
+    n
+
+or
+
+    next
+
+Enter a subroutine/function instead of “stepping over” it:
+
+    s
+or
+
+    step
+
+
+“stack frame display” → summary of the stack.
+
+See where we are in the stack:
+
+    bt
+
+or
+
+    backtrace
+
+Print values of variables:
+
+    p varname
+or
+
+    print varname
+
+Show ten lines surrounding the current line:
+
+    l
+
+or
+
+    list
+
+Make the program just continue:
+
+    c
+
+or
+
+    continue
+
+
+
+Getting in an Out of GDB
+------------------------
+
+gdb → start GDB.
+gdb program_to_debug → start gdb, loading a program to debug.
+quit or Ctrl+d → exit.
+
+Invoking GDB
+------------
+
+    gdb --help
+
+    gdb PROGRAM
+    gdb PROGRAM CORE
+
+
+Specifying a PID:
+
+    gdb PROGRAM 987
+
+
+Debug a program, passing arguments to the debugged program. (-02 -c main.c are
+passed to gcc as arguments):
+
+    gdb --args gcc -02 -c main.c
+
+The order of the arguments matter when the -x option is used.
+
+Avoid initial messages:
+
+    gdb --silent
+    gdb -q
+    gdb --quite
+
+
+print
+-----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

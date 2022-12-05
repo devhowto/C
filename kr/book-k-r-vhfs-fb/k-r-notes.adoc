@@ -1,0 +1,2372 @@
+= The C Programming Language (K&R) Notes
+:source-highlighter: pygments
+:pygments-css: class
+:toc: left
+:toc-title: Index
+:idprefix:
+:toclevels: 6
+:sectlinks:
+:webfonts!:
+:icons: font
+:figure-caption!:
+
+== Tracking ==
+
+
+== Errata ==
+http://www.bien-programmer.fr/2ediffs.html[http://www.bien-programmer.fr/2ediffs.html]
+
+
+
+== [10/10] CHAPTER 1: A Tutorial Introduction ==
+One method of communicating data between functions is for the calling function to provide a list of values, called arguments, to the function it calls.
+
+A sequence of characters in double quotes, like "hello, world\n" , is called a character
+string or string constant.
+
+printfnever supplies a newline character automatically.
+
+18:53:16        +Nistur | Ok, what kind of fucking screws do I need for this fucking case?
+18:53:26 +barcelona1937 | the fucking ones
+18:53:30 +barcelona1937 | clearly
+
+
+=== 1.1 Getting Started ===
+Nothing much important...
+
+
+=== 1.2 TODO vars arithmetic exprs ===
+C, TODO as in many other languages, integer division truncates: any fractional part is discarded. Since 5 and 9 are integers. 5/9 would be truncated to zero and so all the Celsius temperatures
+would TODO be reported as zero.
+
+5 TODO is a constant.
+
+If TODO an arithmetic operator has integer operands, an integer operation is performed. If an
+arithmetic TODO operator has one floating-point operand and one integer operand, however, the
+integer TODO will be converted to floating point before the operation is done. If we had written
+(fahr-32) TODO , the 32 would be automatically converted to floating point.
+
+....
+printf("%6.2f\n", 1.234);
+  1.23
+....
+
+So, TODO 6 means, 2 spaces of padding, 1, the dot, and the two decimal places, which means the 6 counts everything.
+1.23 TODO are four characters. Then, just padd 2 spaces on the left.
+
+\% TODO is not %, but %% is %.
+
+printf("%15s\t%15s\n", "Fahrenheit", "Celsius") e é imprimido um único espaço no lugar do \t? Por que?
+
+....
+09:30:04  Fernando-Basso | I have printf("%15s\t%15s\n", "Fahrenheit", "Celcius");, and it
+                         | prints one space for \t.
+09:30:07  Fernando-Basso | Why?
+09:31:30    Love4Boobies | What do you expect it to print?
+09:32:11  Fernando-Basso | \t to print 8 spaces, or 4, but not 1 space.
+09:32:26          mi6x3m | Fernando-Basso: What do you print to? The console?
+09:32:41  Fernando-Basso | Yep, urxvt, tmux.
+09:33:01          mi6x3m | well \t is not a displayable character, it's a control character.
+09:33:09          mi6x3m | your output environment interprets it as 1 space
+09:33:11    Love4Boobies | Fernando-Basso: A tab is usually rendered as space up to the next
+                         | tabstop, not as a fixed number of spaces.
+09:33:58    Love4Boobies | In this case, the tabsop is likely 8 so the next tabstop would be
+                         | at 16---meaning you are one space away from it.
+09:35:32    Love4Boobies | Note that you may very well be able to configure your terminal to
+                         | have a tabstop every 3 characters, say.
+....
+
+
+=== 1.3 The For Statement
+
+link:./examples/chap01/04-fahr-cels-for.c[./examples/chap01/04-fahr-cels-for.c]
+
+[source,c,lineos]
+----
+include::./examples/chap01/04-fahr-cels-for.c[]
+----
+
+In any context where it is permissible to usethe value of some type, you can use a more complicated expression of that type (that results in a value of that type).
+
+
+=== 1.4 Symbolic Constants
+
+....
+#define <name> <replacement list>
+....
+
+There is no semicolon at the end! Thereafter, any occurrence of name (not in quotes and not part of another name) will be
+*replaced* by the corresponding replacement text.
+
+link:./examples/chap01/05-symbconst.c[./examples/chap01/05-symbconst.c]
+
+[source,c,lineos]
+----
+include::./examples/chap01/05-symbconst.c[]
+----
+
+Symbolic constants are 'not' variables. And remember, *no semicolon at the end of the define line*.
+
+
+==== Block scope
+
+If you declare a variable outside the loop, it is acessible inside the loop. If, however, you declare it inside the block, then you cannot access it from outside the block.
+
+[source,c,lineos]
+----
+int main(void)
+{
+    int i; // declare i
+    int z; // declare z
+
+    // i is accessible inside for, declared outside.
+    for (i = 0; i < 2; i += 1) {
+        // z is also accessed here, no problem.
+        // z was declared outside the block.
+        z = 10;
+
+        // Declared inside the block, can't be used outside.
+        int k = 5;
+    }
+
+    printf("%d\n", i); // → 2.
+    printf("%d\n", z); // → 10.
+    printf("%d\n", k); // → Error. ‘k’ is does not exist in this scope.
+
+    return 0;
+}
+----
+
+
+=== 1.5 Character Input and Output
+
+A *text stream* is a sequence of characters divided into lines; each line consists of
+zero or more characters followed by a newline character.
+
+`getchar` is the same as `getc(stdin)` (read `man 3 getc`).
+
+`getchar` reads the character as its `int` value. `putchar` prints the int value as a character.
+
+
+
+==== 1.5.1 File Copying
+
+`EOF` is defined in `stdio.h`, and it is -1 on my system.
+
+`!=` is a https://en.wikipedia.org/wiki/Relational_operator[relational operator].
+
+Is the type `char` an unsigned small int (greater than zero)?
+
+link:./examples/chap01/06-getchar-while.c[./examples/chap01/06-getchar-while.c]
+
+[source,c,lineos,lineos]
+----
+include::./examples/chap01/06-getchar-while.c[]
+----
+
+
+
+==== Operational Operators Precedence
+
+`!=` has higher precedence than `=`.
+
+....
+c = getchar() != EOF
+....
+
+is equivalent to
+
+....
+c = (getchar() != EOF)
+....
+
+which has the undesired effect of setting c to 0 or 1, depending on whether or not the call of
+getchar returned end of file.Therefore, you generally want
+
+....
+(c = getchar()) != EOF
+....
+
+link:./examples/chap01/07-getchar-while-v2.c[./examples/chap01/07-getchar-while-v2.c]
+
+.getchar while I/O chars
+[source,c,lineos]
+----
+include::./examples/chap01/07-getchar-while-v2.c[]
+----
+
+0 is false is 1 is truthy.
+
+
+==== 1.5.2 Character Counting
+
+++ and -- can be used as prefix and postfix operators (but not as infix operators).
+
+Use `%ld` to printf a long int.
+
+`printf` uses `%f` for both `float` and `double`.
+
+If a `for` loop doesn't need a real block, one can use a *null statement*.
+
+....
+for (nc = 0; getchar() != EOF; ++nc)
+    ;
+....
+
+Note the lone semicolon.
+
+file:/examples/chap01/08-char-count-while.c[file:/examples/chap01/08-char-count-while.c]
+
+[source,c,lineos]
+----
+include::./examples/chap01/08-char-count-while.c[]
+----
+
+file:/examples/chap01/09-char-count-for.c[file:/examples/chap01/09-char-count-for.c]
+
+[source,c,lineos]
+----
+include::./examples/chap01/09-char-count-for.c[]
+----
+
+
+==== 1.5.3 Line Counting
+
+The standard library ensures that an input text stream appears as a sequence of lines, each terminated by a newline. Hence, counting lines is just counting newlines.
+
+link:./examples/chap01/10-count-lines.c[./examples/chap01/10-count-lines.c]
+[source,c,lineos,lineos]
+----
+include::./examples/chap01/10-count-lines.c[]
+----
+
+Careful not to use a single `=` when you intend to use `==`, because in a test, `foo = bar` is a valid expression.
+
+'a' (single quotes) is a *character constant* and its value is the integer that represent "a" in the machine's character set.
+
+link:./other/02-charconst.c[./other/02-charconst.c]
+
+[source,c,lineos]
+----
+include::./other/02-charconst.c[]
+----
+
+Escape sequences (`\n`, `\t`, etc) worth both inside single and double quotes, and count as a single character footnoteref:[1, The C Programming Language, page 22. The use '\n' in single quote, where they probably meant "\n" in double quote.]
+
+
+===== Errata
+
+Page 22
+
+"...on the other hand, '\n' is a string constant that happens to contain only one character."
+
+Note that they use single quotes in '\n'. They probably meant "\n" (double quotes).
+
+Exercise 1-8, 1-9, 1-10.
+
+==== 1.5.4 Word Counting
+
+Associates from right to left, so, this is not special syntax.
+....
+nl = nw = nc = 0;
+....
+
+`&&` is higher precedence than `||`.
+
+link:./examples/chap01/11-word-count.c[./examples/chap01/11-word-count.c]
+
+[source,c,lineos]
+----
+include::./examples/chap01/11-word-count.c[]
+----
+
+==== Exercises
+
+link:./exercises/chap01/05-fahr-cels-for-rev.c[./exercises/chap01/05-fahr-cels-for-rev.c]
+
+[source,c,lineos]
+----
+include::./exercises/chap01/05-fahr-cels-for-rev.c[]
+----
+
+link:./exercises/chap01/06-getchar-eof-comp.c[./exercises/chap01/06-getchar-eof-comp.c]
+
+[source,c,lineos]
+----
+include::./exercises/chap01/06-getchar-eof-comp.c[]
+----
+
+link:./exercises/chap01/07-value-of-eof.c[./exercises/chap01/07-value-of-eof.c]
+
+[source,c,lineos]
+----
+include::./exercises/chap01/07-value-of-eof.c[]
+----
+
+link:./exercises/chap01/08-count-whitespace.c[./exercises/chap01/08-count-whitespace.c]
+
+[source,c,lineos]
+----
+include::./exercises/chap01/08-count-whitespace.c[]
+----
+
+link:./exercises/chap01/09-squeeze-blanks.c[./exercises/chap01/09-squeeze-blanks.c]
+[source,c,lineos]
+----
+// Exercise 1-9. Write a program to copy its input to its output, replacing
+// each string of one or more blanks by a single blank.
+
+#include <stdio.h>
+
+#define TRUE 1
+#define FALSE 0
+
+int main(void)
+{
+    int c, is_blank;
+
+    is_blank = FALSE;
+
+    while ((c = getchar()) != EOF) {
+        if (c == ' ') {
+            if (is_blank == FALSE) {
+                putchar(c);
+            }
+            is_blank = TRUE;
+        }
+        else {
+            putchar(c);
+            is_blank = FALSE;
+        }
+    }
+
+    return 0;
+}
+----
+
+link:f/exercises/chap01/10-visual-control-chars.c[f/exercises/chap01/10-visual-control-chars.c]
+[source,c,lineos]
+----
+// Exercise 1-10. Write a program to copy its input to its output, replacing each
+// tab by \t , each backspace by \b , and each backslash by \\ . This makes tabs
+// and backspaces visible in an unambiguous way.
+
+#include <stdio.h>
+
+int main(void)
+{
+    int c;
+
+    while ((c = getchar()) != EOF) {
+        if (c == '\t')
+            fprintf(stdout, "\\t");
+        else if (c == '\b')
+            fprintf(stdout, "\\b");
+        else if (c == '\\')
+            fprintf(stdout, "\\");
+        else
+            fprintf(stdout, "%c", c);
+    }
+
+    return 0;
+}
+
+// \b can be inserted by hitting Ctrl+Backspace or Ctrl+h.
+----
+
+1-11: files very lager that would overflow the variables, corrupt data.
+
+link:./exercises/chap01/12-word-per-line.c[./exercises/chap01/12-word-per-line.c]
+[source,c,lineos]
+----
+// Exercise 1-12. Write a program that prints its input one word per line.
+
+#include <stdio.h>
+
+#define BLANK 1
+#define NON_BLANK 0
+
+int main(void)
+{
+    int c, prev;
+
+    prev = NON_BLANK;
+    while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            if (prev == NON_BLANK) {
+                putchar('\n');
+            }
+            prev = BLANK;
+        }
+        else {
+            prev = NON_BLANK;
+            putchar(c);
+        }
+    }
+
+    return 0;
+}
+----
+
+
+
+=== 1.6 Arrays ===
+
+All mean the same thing:
+
+The first one allows you to easily see the interval!
+
+----
+`'0' <= c && c <= '9'`
+`'9' >= c && c >= '0'`
+`c >= '0' && c <= '9'`
+
+'0' = 48, '1' = 49
+'0' - '1'
+48  - 49 = 1.
+----
+
+
+An array subscript can be any integer expression (`5`, `i`, `i + 3`, c - '0').
+
+
+
+==== Example 12 count char types ====
+link:./examples/chap01/12-count-char-types.c[./examples/chap01/12-count-char-types.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+/* count digits, white space, others */
+int main(void)
+{
+    int ndigit[10] = {0}; // initialize all positions to zero.
+    int c, i, nwhite, nother;
+
+    nwhite = nother = 0;
+
+    while ((c = getchar()) != EOF)
+        if (c >= '0' && c <= '9')
+            ++ndigit[c - '0'];
+        else if (c == ' ' || c == '\n' || c == '\t')
+            ++nwhite;
+        else
+            ++nother;
+
+    fprintf(stdout, "digits =");
+    for (i = 0; i < 10; ++i)
+        fprintf(stdout, " %d", ndigit[i]);
+
+    fprintf(stdout, ", white space = %d, other = %d\n", nwhite, nother);
+
+    return 0;
+}
+----
+
+
+
+==== Exercise 1-13 - count char types histogram ====
+link:./exercises/chap01/13-histogram-horizontal.c[./exercises/chap01/13-histogram-horizontal.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+#define LIM 15
+
+#define IN 1
+#define OUT 0
+
+/* count digits, white space, others */
+int main(void)
+{
+    int c, i, k, state, n_chars_word;
+    int lengths[LIM] = {0}; // initialize all positions to the nul byte.
+
+    n_chars_word = 0;
+    state = OUT;
+
+    // Assumes user always hits enter to send input.
+    while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            if (state == IN) {
+                ++lengths[n_chars_word - 1];
+                n_chars_word = 0;
+                state = OUT;
+            }
+        }
+        else {
+            state = IN;
+            ++n_chars_word;
+        }
+    }
+
+    for (i = 0; i < LIM; ++i) {
+        fprintf(stdout, "%2d: ", i);
+        for (k = 0; k < lengths[i]; ++k) {
+            fprintf(stdout, "#");
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}
+----
+
+link:./exercises/chap01/13b-histogram-vertical.c[./exercises/chap01/13b-histogram-vertical.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+#define LIM 15
+
+#define IN 1
+#define OUT 0
+
+/* Count word sizes and prints histogram. */
+int main(void)
+{
+    int c, i, k, state, n_chars_word;
+    int lengths[LIM] = {0}; // initialize all positions to the nul byte.
+
+    n_chars_word = 0;
+    state = OUT;
+
+    // Assumes user always hits enter to send input.
+    while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            if (state == IN) {
+                ++lengths[n_chars_word - 1];
+                n_chars_word = 0;
+                state = OUT;
+            }
+        }
+        else {
+            state = IN;
+            ++n_chars_word;
+        }
+    }
+
+    for (i = 1; i < LIM; ++i)
+        fprintf(stdout, "%3d\t", i);
+
+    putchar('\n');
+
+    for (i = 0; i < LIM; ++i) {
+        for (k = 1; k < LIM; ++k) {
+            if (i < lengths[k]) {
+                fprintf(stdout, "%3c\t", '#');
+            }
+            else {
+                fprintf(stdout, "%3c\t", '.');
+            }
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}
+----
+
+link:./exercises/chap01/13c-histogram-vertical.c[./exercises/chap01/13c-histogram-vertical.c]
+[source,c,lineos]
+----
+// Exercise 1-13. Write a program to print a histogram of the lengths of words
+// in its input. It is easy to draw the histogram with the bars horizontal; a
+// vertical orientation is more challenging.
+
+#include <stdio.h>
+
+#define LIM 15
+
+#define IN 1
+#define OUT 0
+
+/* Count word sizes and prints histogram. */
+int main(void)
+{
+    int c, i, k, state, n_chars_word;
+    int lengths[LIM] = {0}; // initialize all positions to the nul byte.
+
+    n_chars_word = 0;
+    state = OUT;
+
+    // Assumes user always hits enter to send input.
+    while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            if (state == IN) {
+                ++lengths[n_chars_word - 1];
+                n_chars_word = 0;
+                state = OUT;
+            }
+        }
+        else {
+            state = IN;
+            ++n_chars_word;
+        }
+    }
+
+    for (i = 1; i < LIM; ++i)
+        fprintf(stdout, "%3d\t", i);
+
+    putchar('\n');
+
+    for (i = LIM - 1; i > 0; --i) {
+        for (k = 0; k < LIM - 1; ++k) {
+            if (i <= lengths[k]) {
+                fprintf(stdout, "%3c\t", '#');
+            }
+            else {
+                fprintf(stdout, "%3c\t", '.');
+            }
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}
+----
+
+
+
+==== Exercise 1-14 histogram char types ====
+link:./exercises/chap01/14-hist-chars-types.c[./exercises/chap01/14-hist-chars-types.c]
+[source,c,lineos]
+----
+// Exercise 1-14. Write a program to print a histogram of the frequencies of
+// different characters in its input.
+
+#include <stdio.h>
+
+#define MAX_NUM_CHARS 12
+#define NUM_TYPES 3
+#define TYPE_BLANK 0
+#define TYPE_DIGIT 1
+#define TYPE_OTHER 2    // letters, punctuation, etc.
+
+
+int main(void)
+{
+    int c, i, k;
+
+    int hist[NUM_TYPES] = {0}; // initiaize all positions to zero.
+
+    // Assumes user always hits enter to send input.
+    while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t')
+            ++hist[TYPE_BLANK];
+        else if ('0' <= c && c <= '9')
+            ++hist[TYPE_DIGIT];
+        else
+            ++hist[TYPE_OTHER];
+    }
+
+    for (i = MAX_NUM_CHARS - 1; i > 0; --i) {
+        for (k = 0; k < NUM_TYPES; ++k) {
+            if (i <= hist[k]) {
+                fprintf(stdout, "%3c\t", '#');
+            }
+            else {
+                fprintf(stdout, "%3c\t", '.');
+            }
+        }
+        putchar('\n');
+    }
+
+    fprintf(stdout, "Blanks\tDigits\tOther\n");
+
+    return 0;
+}
+----
+
+
+
+=== 1.7 Functions ===
+With properly designed functions, itis possible to ignore 'how' a job is done; knowing 'what' is done is sufficient.
+
+The word “name” is used with the same meaning as “identifier”.
+
+*formal arguments* are the names used when declaring a funtion. *actual arguments* are the atual values passed when invoking function.
+
+Main returns a value to the environment in which it is running. 0 means “normal” termination (no problems or errors whatsoever) and any other value signals some sort of error.
+
+link:./examples/chap01/13-power.c[./examples/chap01/13-power.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int power(int base, int exp);
+
+int main(void)
+{
+    int i;
+
+    for (i = 0; i < 10; ++i)
+        fprintf(stdout, "%d %d %d\n", i, power(2, i), power(-3, i));
+
+    return 0;
+}
+
+int power(int base, int exp)
+{
+    int i, acc;
+
+    acc = 1;
+    for (i = 1; i <= exp; ++i)
+        acc = acc * base;
+
+    return acc;
+}
+----
+
+
+
+==== Exercise Fahr Cels Functions ====
+link:./exercises/chap01/15-fahr-cels-functs.c[./exercises/chap01/15-fahr-cels-functs.c]
+[source,c,lineos]
+----
+//
+// Exercise 1-15. Write a program to print the corresponding Celsius to
+// Fahrenheit table.
+//
+
+#include <stdio.h>
+#include <string.h>
+
+float fahr2cels(float fahr);
+void print_table(short lower, short upper, short step);
+
+int main(void)
+{
+    short lower, upper, step;
+
+    lower = -100;      /* lower limit of temperature scale */
+    upper = 0;    /* upper limit */
+    step  = 5;     /* step size */
+
+    print_table(lower, upper, step);
+
+    return 0;
+}
+
+
+/**
+ * Given a temperature in fahrenheit, return its celsius equivalent.
+ */
+float fahr2cels(float fahr)
+{
+    return (5.0 / 9.0) * (fahr - 32.0);
+}
+
+void print_table(short lower, short upper, short step)
+{
+    float fahr;
+
+    printf("%15s%15s\n", "Fahrenheit", "Celcius");
+    printf("------------------------------\n");
+
+    fahr = lower;
+
+    while (fahr <= upper) {
+        printf("%15.0f%15.2f\n", fahr, fahr2cels(fahr));
+        fahr = fahr + step;
+    }
+}
+----
+
+
+
+=== 1.8 Arguments - Call by Value ===
+link:./examples/chap01/14-power-by-value.c[./examples/chap01/14-power-by-value.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int power(int base, int exp);
+
+int main(void)
+{
+    int i;
+
+    for (i = 0; i < 10; ++i)
+        fprintf(stdout, "%8d %8d %8d\n", i, power(2, i), power(-3, i));
+
+    return 0;
+}
+
+int power(int base, int exp)
+{
+    int acc;
+
+    for (acc = 1; exp > 0; --exp)
+        acc = acc * base;
+
+    return acc;
+}
+----
+
+
+
+=== 1.9 Character Arrays ===
+When the name of an array is used as an argument, the value passed to the function is the location or address of the beginning of the array - there is no copying of array elements. By subscripting this value, the function can access and alter any argument of the array.
+
+You don't need `string.h` to use `printf("%s", str)`.
+
+link:./examples/chap01/15-longest-line-char-array-ref.c[./examples/chap01/15-longest-line-char-array-ref.c]
+[source,c,lineos]
+----
+// while (there's another line)
+//     if (it's longer than the previous longest)
+//         (save it)
+//         (save its length)
+// print longest line
+
+#include <stdio.h>
+
+#define MAXLINE 120 // Maximum input line length.
+
+int getline(char line[], int maxline);
+void copy(char from[], char to[]);
+
+// Print the longest input input line.
+int main(void)
+{
+    int len;                    // current line length
+    int max;                    // maximum lenght so far
+    char line[MAXLINE];         // current input line
+    char longest[MAXLINE];      // longest line saved here
+
+    max = 0;
+    while ((len = getline(line, MAXLINE)) > 0) {
+        if (len > max) {
+            max = len;
+            copy(line, longest);
+        }
+    }
+
+    // there was a line
+    if (max > 0) {
+        fprintf(stdout, "%s", longest);
+    }
+
+    return 0;
+}
+
+// `s` is a reference. The original "variabl" in the calling
+// function is filled with characters.
+int getline(char s[], int lim)
+{
+    int c, i;
+
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    s[i] = '\0';
+    return i;
+}
+
+void copy(char from[], char to[])
+{
+    int i;
+
+    i = 0;
+    while ((to[i] = from[i]) != '\0')
+        ++i;
+}
+----
+
+
+
+==== Exercise 16 longest line ====
+link:./exercises/chap01/16-print-lines.c[./exercises/chap01/16-print-lines.c]
+[source,c,lineos]
+----
+// Exercise 1-16. Revise the main routine of the longest-line program so it
+// will correctly print the length of arbitrary long input lines, and as much
+// as possible of the text.
+// If the line is longer than max length, ignore only the exceeding characters.
+
+#include <stdio.h>
+
+#define MAXLINE 30 // Maximum input line length.
+
+int getline(char line[], int maxline);
+
+// Print the longest input input line.
+int main(void)
+{
+    int len;                    // current line length
+    char line[MAXLINE];         // current input line
+
+    while ((len = getline(line, MAXLINE)) > 0) {
+        fprintf(stdout, "len %3d: %s\n", len, line);
+    }
+
+    return 0;
+}
+
+// `s` is a reference. The original "variable" in the calling
+// function is filled with characters.
+int getline(char s[], int lim)
+{
+    int c, i;
+
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    // In the else so we don't accidentaly flush the next line.
+    else if (c != EOF) {
+        // Consumes the rest of the line to flush the input buffer.
+        while (getchar() != '\n')
+            ;
+    }
+    s[i] = '\0';
+
+
+    return i;
+}
+----
+
+
+
+==== Exercise 17 print lines longer than N chars ====
+link:./exercises/chap01/17-print-lines-longer-than.c[./exercises/chap01/17-print-lines-longer-than.c]
+[source,c,lineos]
+----
+// Exercise 1-17. Write a program to print all input lines that are longer than
+// 80 characters.
+
+#include <stdio.h>
+
+#define MAXLINE 500 // Maximum input line length.
+#define THRESHOLD 80 // Print lines at least as long as this value.
+
+int getline(char line[], int maxline);
+
+// Print lines greater than or equal to THRESHOLD characters.
+int main(void)
+{
+    int len;                    // current line length
+    char line[MAXLINE];         // current input line
+
+    while ((len = getline(line, MAXLINE)) > 0) {
+        if (len >= THRESHOLD)
+            fprintf(stdout, "len %3d: %s\n", len, line);
+    }
+
+    return 0;
+}
+
+// `s` is a reference. The original "variable" in the calling
+// function is filled with characters.
+int getline(char s[], int lim)
+{
+    int c, i;
+
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    // In the else so we don't accidentaly flush the next line.
+    else if (c != EOF) {
+        // Consumes the rest of the line to flush the input buffer.
+        while (getchar() != '\n')
+            ;
+    }
+    s[i] = '\0';
+
+
+    return i;
+}
+----
+
+
+
+==== Exercise 18 remove trailing blanks from lines ====
+link:./exercises/chap01/18-trim-l-r.c[./exercises/chap01/18-trim-l-r.c]
+[source,c,lineos]
+----
+// Exercise 1-18. Write a program to remove trailing blanks and tabs from each
+// line of input, and to delete entirely blank lines.
+
+// Only handles ASCII correctly.
+
+#include <stdio.h>
+
+#define MAXLINE 500 // Maximum input line length.
+
+int getline(char line[], int maxline);
+
+int trim_r(char line[], int len);
+int trim_l(char line[], int len);
+int trim(char line[], int len);
+
+int main(void)
+{
+    int len;                    // current line length
+    char line[MAXLINE];         // current input line
+
+    while ((len = getline(line, MAXLINE)) > 0) {
+        len = trim_r(line, len);
+        len = trim_l(line, len);
+        if (len > 1)
+            fprintf(stdout, "%03d: %s", len, line);
+    }
+
+    return 0;
+}
+
+// `s` is a reference. The original "variable" in the calling
+// function is filled with characters.
+int getline(char s[], int lim)
+{
+    int c, i;
+
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    // In the else so we don't accidentaly flush the next line.
+    else if (c != EOF) {
+        // Consumes the rest of the line to flush the input buffer.
+        while (getchar() != '\n')
+            ;
+    }
+    s[i] = '\0';
+
+
+    return i;
+}
+
+int trim_r(char line[], int len)
+{
+    int i;
+    short has_nl;
+
+    has_nl = 0; // 0 is false, 1 is true.
+
+    // 'bar \n\0'
+
+    // Run backwards first.
+    for (i = len - 1; i >= 0; --i) {
+        // If it is the default/original string terminator.
+        if (line[i] == '\0') {
+            continue;
+        }
+
+        // For now, we'll just override everthing from the end of the
+        // string to the first non non-blank (backwards) with NUL.
+        if (line[i] == '\n') {
+            has_nl = 1;
+            line[i] = '\0';
+        }
+        else if (line[i] == ' ' || line[i] == '\t') {
+            line[i] = '\0';
+        }
+        else {
+            // Then we must have found a non-blank char.
+            break;
+        }
+    }
+
+    if (has_nl) line[++i] = '\n';
+
+    return ++i;
+}
+
+int trim_l(char line[], int len)
+{
+    int i, shift;
+    short is_shifting;
+
+    is_shifting = 0;
+    shift = 0;
+    i = 0;
+
+    for ( ; i < len; ++i) {
+        if ((line[i] == ' ' || line[i] == '\t') && !is_shifting) {
+            shift += 1;
+        }
+        else {
+            is_shifting = 1;
+            line[i - shift] = line[i];
+            if ((len - shift)  <= i) {
+                line[i] = '\0';
+            }
+        }
+    }
+
+    return len - shift;
+}
+----
+
+Create the object of the lib:
+....
+gcc -std=c99 -Wall -pedantic -fPIC -o lib/line.o -c ./lib/line.c
+....
+
+Create the shared object:
+....
+gcc -shared -o ./lib/libmyline.so ./lib/line.o
+....
+
+Compile main program with the libs (not that is 'l' 'myline' (without 'lib'):
+....
+gcc -Wall -L./lib -o ./devel devel.c -lmyline
+....
+
+Run te program telling it where the lib is to be found:
+....
+LD_LIBRARY_PATH=./lib ./devel
+....
+
+
+
+==== Exercise 19 reverse lines ====
+Remember that even though strings start at position zero, the zeroth character produces length 1 (not zero). So, "bar\n\0" is:
+
+[width="80%",options=""]
+|====
+| index| 0| 1| 2| 3| 4
+| string| b| a| r| \n| \0
+| length| 1| 2| 3| 4|
+|====
+
+link:./exercises/chap01/19-reverse.c[./exercises/chap01/19-reverse.c]
+[source,c,lineos]
+----
+// Exercise 1-19. Write a function reverse(s) that reverses the character
+// string s . Use it to write a program that reverses its input a line at a
+// time.
+
+#include <stdio.h>
+#include "lib/line.h"
+
+#define MAXLEN 200
+
+void revstr(char line[], int len);
+
+int main(void)
+{
+    int len;
+    char line[MAXLEN];
+
+    while ((len = get_line(line, MAXLEN)) > 0) {
+        revstr(line, len);
+        fprintf(stdout, "%s", line);
+    }
+
+    return 0;
+}
+
+void revstr(char line[], int len)
+{
+    int tmpchr;
+    int i, j;
+
+    for (i = 0, j = len - 2; i < (len / 2); ++i, --j) {
+        tmpchr = line[i];
+        line[i] = line[j];
+        line[j] = tmpchr;
+    }
+}
+----
+
+
+
+=== 1.10 External Variables and Scope ===
+AUTOMATIC VARIABLES = local variables: they are created when the function is executed and disappear when the function exits.
+EXTERNAL VARIABLES = global variables.
+
+
+
+
+=== Example longest line external variables ===
+link:./examples/chap01/16-longest-line-extern.c[./examples/chap01/16-longest-line-extern.c]
+[source,c,lineos]
+----
+#include <stdio.h>
+
+#define MAXLINE 1000 /* maximum input line size */
+
+// EXTERNAL (OR GLOBAL) VARIABLES.
+int max;                    /* maximum length seen so far */
+char line[MAXLINE];         /* current input line */
+char longest[MAXLINE];      /* longest line saved here */
+
+int getline(void);
+void copy(void);
+
+/* print longest input line; specialized version */
+int main()
+{
+    int len;
+    extern int max;
+    extern char longest[];
+
+    max = 0;
+    while ((len = getline()) > 0)
+        if (len > max) {
+            max = len;
+            copy();
+        }
+    if (max > 0) /* there was a line */
+        printf("%s", longest);
+    return 0;
+}
+
+
+/* getline: specialized version */
+int getline(void)
+{
+    int c, i;
+    extern char line[];
+    for (i = 0; i < MAXLINE - 1
+            && (c = getchar()) != EOF && c != '\n'; ++i)
+                line[i] = c;
+    if (c == '\n') {
+        line[i] = c;
+        ++i;
+    }
+    line[i] = '\0';
+    return i;
+}
+
+/* copy: specialized version */
+void copy(void)
+{
+    int i;
+    extern char line[], longest[];
+    i = 0;
+    while ((longest[i] = line[i]) != '\0')
+        ++i;
+}
+----
+
+“If the definition of the external variable occurs in the source file before its use in a particular function, then there is no need for an extern declaration in the function.”
+
+
+=== Exercise 20 - detab ===
+link:./exercises/chap01/20-detab.c[./exercises/chap01/20-detab.c]
+[source,c,lineos]
+----
+// Exercise 1-20. Write a program detab that replaces tabs in the input with
+// the proper number of blanks to space to the next tab stop. Assume a fixed
+// set of tab stops, say every n columns. Should n be a variable or a symbolic
+// parameter?
+
+#include <stdio.h>
+#include "lib/line.h"
+
+#define MAXLEN 200      // Max input length allowed.
+#define TABSIZE 8       // 8 spaces for each tab size.
+
+int detab_v1(char line[], int len);
+int detab_v2(char line[], int len);
+
+int main(void)
+{
+    int len;
+    char line[MAXLEN];
+
+    while ((len = get_line(line, MAXLEN)) > 0) {
+        len = detab_v1(line, len);
+        fprintf(stdout, "len %d, line %s", len, line);
+    }
+
+    return 0;
+}
+
+int detab_v1(char line[], int len)
+{
+
+    int i;
+
+    int pos_dst;
+    int pos_src;
+
+    i = 0;
+    while (line[i] != '\0') {
+        if (line[i] == '\t') {
+            pos_dst = len + TABSIZE - 1;
+            pos_src = len;
+            // Shift the actuall chars.
+            while (pos_src > i) {
+                line[pos_dst] = line[pos_src];
+                --pos_dst;
+                --pos_src;
+            }
+            // Fills in the “emptied” space.
+            while (pos_dst >= i) {
+                line[pos_dst] = '-';
+                --pos_dst;
+            }
+            len += TABSIZE - 1;
+        }
+        ++i;
+
+    }
+
+    return len;
+}
+
+int detab_v2(char line[], int len)
+{
+    int i = 0;
+    int destination, source;
+
+    // Loop through array of characters
+    while (line[i] != '\0') {
+        // Find tab chars
+        if (line[i] == '\t') {
+            // Replace tab with a whitespace
+            line[i] = '#';
+
+            // Loop the array again (this time backwards), shifting
+            // everything that comes after the tab char TABSIZE - 1
+            // positions to the right
+            destination = len + TABSIZE - 1;
+            while (destination > i) {
+                source = destination - (TABSIZE - 1);
+                if ((source) > i)
+                    line[destination] = line[source];
+                else
+                    line[destination] = '#';
+
+                --destination;
+            }
+
+            // Increment length by TABSIZE - 1
+            len = len + (TABSIZE - 1);
+        }
+
+        ++i;
+    }
+
+    return len;
+
+}
+----
+
+
+
+=== Exercise 21 - entab ===
+link:./exercises/chap01/21-entab.c[./exercises/chap01/21-entab.c]
+[source,c,lineos]
+----
+// Exercise 1-21. Write a program entab that replaces strings of blanks by the
+// minimum number of tabs and blanks to achieve the same spacing. Use the same
+// tab stops as for detab .  When either a tab or a single blank would suffice
+// to reach a tab stop, which should be given preference?
+
+#include <stdio.h>
+#include "lib/line.h"
+
+#define MAXLEN 200      // Max input length allowed.
+#define TABSIZE 8       // 8 spaces for each tab size.
+
+int entab(char line[], int len);
+
+int main(void)
+{
+    int len;
+    char line[MAXLEN];
+
+    while ((len = get_line(line, MAXLEN)) > 0) {
+        len = entab(line, len);
+        fprintf(stdout, "len %d, line %s", len, line);
+    }
+
+    return 0;
+}
+
+int entab(char line[], int len)
+{
+    int i,
+        pos_src,
+        pos_dst,
+        pos_first_spc,
+        num_spc;
+
+    i = 0;
+    while (line[i] != '\0') {
+
+        if (line[i] == ' ') {
+            ++num_spc;
+
+            if (num_spc == TABSIZE) {
+                num_spc = 0;
+                len -= (TABSIZE - 1);
+
+                pos_first_spc = i - (TABSIZE - 1);
+                line[pos_first_spc] = '#';
+
+                pos_src = pos_first_spc + TABSIZE;
+                do {
+                    pos_dst = pos_src - (TABSIZE - 1);
+                    line[pos_dst] = line[pos_src];
+                } while (line[pos_src++] != '\0');
+
+                // Make i value go back to the position of the first space
+                // so that i++ on the end of the while loop just increments
+                // i and we restart everything from the next character.
+                i = pos_first_spc;
+            }
+        }
+        else {
+            num_spc = 0;
+        }
+
+        ++i;
+    }
+
+    return len;
+}
+----
+
+
+
+=== Exercise 22 - wrap lines ===
+Why does strtol returns a long integer but I can store it in an int and the compiler doesn't complain.
+http://stackoverflow.com/questions/13652556/what-happens-when-i-assign-long-int-to-int-in-c[http://stackoverflow.com/questions/13652556/what-happens-when-i-assign-long-int-to-int-in-c]
+
+link:./exercises/chap01/22-wrap.c[./exercises/chap01/22-wrap.c]
+[source,c,lineos]
+----
+// Exercise 1-22. Write a program to ``fold'' long input lines into two or more
+// shorter lines after the last non-blank character that occurs before the n-th
+// column of input. Make sure your program does something intelligent with very
+// long lines, and if there are no blanks or tabs before the specified column.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "lib/helpers.h"
+
+#define MAXLEN 200
+#define WRAP_AT 20
+
+int wrap(char line[], int len, int wrap_at);
+
+int main(int argc, char *argv[])
+{
+
+    int len, wrap_at;
+    char line[MAXLEN];
+
+    if (argc < 2) {
+        wrap_at = WRAP_AT;
+    }
+    else {
+        // Since this an exercise, and on this machine ints and longs are
+        // of the same size, I will assume it will just work.
+        // http://stackoverflow.com/questions/13652556/what-happens-when-i-assign-long-int-to-int-in-c
+        // They say long to int conversion happens implicitly.
+        // NULL also worked compiling as c89.
+        wrap_at = (int) strtol(*(argv + 1), NULL, 10);
+    }
+
+    while ((len = get_line(line, MAXLEN)) > 0) {
+        len = wrap(line, len, wrap_at);
+        //fprintf(stdout, "len: %d, line: %s", len, line);
+        fprintf(stdout, "%s", line);
+    }
+
+    return 0;
+}
+
+
+int wrap(char* input, int len, int wrap_at)
+{
+    int input_i, line_i, pos_blank;
+
+    if (len <= wrap_at + 1) return len;
+
+    input_i = line_i = 0;
+    pos_blank = -1;
+    while (*(input + input_i) != '\0') {
+
+        if (*(input + input_i) == ' ' || *(input + input_i) == '\t') {
+            pos_blank = input_i;
+        }
+
+        // If there is a \n at the end, we don't want to potentially
+        // consider it a character that should go on the "next line".
+        if (line_i >= wrap_at && (*(input + input_i) != '\n')) {
+            if (pos_blank > -1) {
+                *(input + pos_blank) = '\n';
+
+                // The next "sub line" starts in this position now.
+                input_i = pos_blank + 1;
+            }
+            else {
+                // Shift characters to the right.
+                len = shift_r(input, len, input_i, 1, '\n');
+                ++input_i;
+            }
+            pos_blank = -1;
+            line_i = 0;
+        }
+        else {
+            ++line_i;
+            ++input_i;
+        }
+
+    }
+
+    return len;
+}
+----
+
+
+
+=== Exercise 23 - remove comments ===
+[source,c,lineos]
+----
+// Exercise 1-23. Write a program to remove all comments from a C program.
+// Don't forget to handle quoted strings and character constants properly. C
+// comments don't nest.
+
+#include <stdio.h> // Includes the standard INPUT/OUTPUT library.
+#include "lib/helpers.h" /* Includes our own helper functions. */
+
+#define MAXLEN 200
+
+#define FALSE 0
+#define TRUE  1
+
+#define TYPE_CMT_NONE   0 // Not inside a comment at all.
+#define TYPE_CMT_SINGLE 1 // Inside a single line comment.
+#define TYPE_CMT_MULTI  2 // Inside a multi-line comment.
+
+void remove_comments(char* line, short* type_cmt, short* is_in_str );
+short check_comment_start(char* line);
+short check_comment_single_end(char* line);
+short check_comment_multi_end(char* line);
+
+int main(void)
+{
+
+    int len;
+    short is_in_str,
+          type_cmt;
+    char line[MAXLEN];
+
+    is_in_str = FALSE;
+    type_cmt = TYPE_CMT_NONE;
+
+    while ((len = get_line(line, MAXLEN)) > 0) {
+        remove_comments(line, &type_cmt, &is_in_str);
+        fprintf(stdout, "%s", line);
+    }
+
+    return 0;
+}
+
+/*
+ * If pos_cmt is -1, we are not in a comment (and not in a multiline comment).
+ * If pos_cmt is 0, it means the privous line had a non-finished multiline
+ * comment so we know this next line is still part of a comment opened in
+ * the previous line.
+ */
+
+void remove_comments(char* line, short* type_cmt, short* is_in_str )
+{
+    int i, pos_cmt;
+
+    i = 0;
+    pos_cmt = (*type_cmt == TYPE_CMT_MULTI) ? 0 : -1;
+
+    while (*(line + i) != '\n') {
+
+        if (*is_in_str == TRUE) {
+            if (*(line + i) == '"') {
+                *is_in_str = FALSE;
+            }
+        }
+        else if (pos_cmt == -1 && *(line + i) == '"') {
+            *is_in_str = TRUE;
+        }
+        else {
+            // Check if we are inside a comment of if one begins right now.
+            if (pos_cmt == -1
+                && (*type_cmt = check_comment_start(line + i)) != TYPE_CMT_NONE) {
+
+                pos_cmt = i;
+                *(line + i) = '@';
+            }
+
+            // If we ARE inside a comment.
+            if (pos_cmt > -1) {
+
+                if (*type_cmt == TYPE_CMT_SINGLE && check_comment_single_end(line + i)) {
+                    pos_cmt = -1;
+                    *type_cmt = TYPE_CMT_NONE;
+                }
+                else if (*type_cmt == TYPE_CMT_MULTI && check_comment_multi_end(line + i)) {
+                    pos_cmt = -1;
+                    *type_cmt = TYPE_CMT_NONE;
+                    *(line + i + 1) = '@';
+                }
+
+                *(line + i) = '@';
+            }
+        }
+
+        ++i;
+    }
+}
+
+short check_comment_start(char* line) {
+
+    if (*line == '/' && (*(line + 1) == '*')) {
+        return TYPE_CMT_MULTI;
+    }
+    else if (*line == '/' && (*(line + 1)) == '/') {
+        return TYPE_CMT_SINGLE;
+    }
+
+    return TYPE_CMT_NONE;
+}
+
+short check_comment_multi_end(char* line)
+{
+    if (*line == '*' && *(line + 1) == '/')
+        return TRUE;
+
+    return FALSE;
+}
+
+short check_comment_single_end(char* line)
+{
+    if (*line == '\n')
+        return TRUE;
+
+    return FALSE;
+}
+----
+link:./exercises/chap01/23-remove-comments.c[./exercises/chap01/23-remove-comments.c]
+
+
+
+=== Exercise 24 - check syntax ===
+[source,c,lineos]
+----
+// Exercise 1-24. Write a program to check a C program for rudimentary syntax
+// errors like unmatched parentheses, brackets and braces. Don't forget about
+// quotes, both single and double, escape sequences, and comments. (This
+// program is hard if you do it in full generality.)
+
+#include <stdio.h>
+
+#define MAXLEN 500
+
+#define FALSE 0
+#define TRUE  1
+
+#define STK_SIZE 100
+
+//
+// 0 - not in comment, not in string.
+// 1 - in single comment or in single quote constant character.
+// 2 - in multi line comment or in double quoted string.
+//
+
+short chk_quot(int c, int prev, short quot, short cmnt);
+short chk_cmnt(int c, int prev, short cmnt, short quot);
+
+short is_opening_char(int c, short prev_quot);
+short is_closing_char(int c, short prev_quot);
+short is_match(int opening, int closing);
+
+char push(char c, char* stack);
+char pop(char* stack);
+char top(char* stack);
+void stack_dump(char* stack, short data_type);
+
+void print_error(int unmatched, int lnum);
+
+int main(void)
+{
+    // For storing the current and previous characters.
+    int c,
+        prev,
+        prev_quot,
+        lnum;
+
+    short cmnt,         // Type of comment, none, single line or multiline.
+          quot;         // Type of quote, none, single or double.
+
+    char stk_chars[STK_SIZE] = {[0] = '\0'};
+    char stk_lnums[STK_SIZE] = {[0] = 0};
+
+    cmnt = quot = 0;
+
+    lnum = 1;
+
+    while ((c = getchar()) != EOF) {
+
+        if ('\n' == c) ++lnum;
+
+        cmnt = chk_cmnt(c, prev, cmnt, quot); // 0, 1, 2
+        if (cmnt != 0) {
+            prev = c;
+            continue;
+        }
+
+        quot = chk_quot(c, prev, quot, cmnt); // 0, 1, 2
+
+        // If we are already inside a string, just go one to the
+        // next iteration of the loop. If we are not inside a quote
+        // or it has just started (this is the opening quote char),
+        // we have to check the character.
+        if (quot != 0 && prev_quot == quot) {
+            //putchar(c);
+            prev = c;
+            continue;
+        }
+
+        // Everything from here on relies on the two `continue`s
+        // from the tests above, since they "continue" if we are
+        // inside comments or in the middle of strings.
+
+        // Check if it is an "opening" thing.
+        if (is_opening_char(c, prev_quot)) {
+            push(c, stk_chars);
+            push(lnum, stk_lnums);
+        }
+
+        // Checks the c is a closing thing.
+        if (is_closing_char(c, prev_quot)) {
+
+            if (is_match(c, top(stk_chars))) {
+                pop(stk_chars);
+                pop(stk_lnums);
+            }
+            else {
+                if (*stk_chars > 0) {
+                    print_error(top(stk_chars), top(stk_lnums));
+                }
+                else {
+                    print_error(c, lnum);
+                }
+            }
+        }
+
+        prev = c;
+        prev_quot = quot;
+    }
+
+    if (*stk_chars> 0) {
+        print_error(top(stk_chars), top(stk_lnums));
+    }
+
+    return 0;
+}
+
+
+/**
+ * Check if we are inside a quote or ended it.
+ */
+short chk_quot(int c, int prev, short quot, short cmnt)
+{
+    // If we are inside a comment, we can't possibly be inside quotes.
+    if (cmnt != 0) return 0;
+
+    // If we are inside single quote, check if it has ended.
+    // We make sure the previous char was not an escape.
+    if (quot == 1 && prev != '\\' && c == '\'') return 0;
+
+    // If we are inside double quotes, check if it has ended.
+    // We make sure the previous char was not an escape.
+    if (quot == 2 && prev != '\\' && c == '"') return 0;
+
+    // If we are inside double quotes, we shall not check if
+    // another quote has started, for instance.
+    if (quot == 0) {
+        // Otherwise, check if a quote has started.
+        if (c == '\'') return 1;
+        if (c == '"') return 2;
+    }
+
+    // This will be returned when we are in the middle of a quoted thing
+    // and we still did not find the end of it.
+    // Since we found no condition to update the type of quote,
+    // just return the current status as it was outside the function.
+    return quot;
+}
+
+
+/**
+ * Check if we are inside a comment or ended it.
+ */
+short chk_cmnt(int c, int prev, short cmnt, short quot)
+{
+    // If we are in quotes, we can't possibly be inside a comment.
+    if (quot != 0) return 0;
+
+    // If we are inside a single line comment, check if it has ended.
+    if (cmnt == 1 && c == '\n') {
+        return 0;
+    }
+
+    // If we are inside a multi line comment, check if it has ended.
+    if (cmnt == 2 && prev == '*' && c == '/') {
+        return 0;
+    }
+
+    // Only check for comment start if we are not already inside one.
+    if (cmnt == 0) {
+        // Otherwise check if a comment has started.
+        if (prev == '/' && c == '/') {
+            return 1;
+        }
+
+        if (prev == '/' && c == '*') {
+            return 2;
+        }
+    }
+
+    // This will be returned when we are in the middle of a comment
+    // and we still did not find the end of it.
+    // Since we found no condition to update the type of comment,
+    // just return the current status as it was outside the function.
+    return cmnt;
+}
+
+
+char push(char c, char* stack)
+{
+    *(stack + ++*stack) = c;
+    return c;
+}
+
+char pop(char* stack)
+{
+    char top = *(stack + *stack);
+    --*stack;
+    return top;
+}
+
+char top(char* stack)
+{
+    return *(stack + *stack);
+}
+
+void stack_dump(char* stack, short data_type)
+{
+    for (int i = 1; i <= *stack; ++i) {
+        if (data_type == 0)
+            fprintf(stdout, "%5c ", *(stack + i));
+        else
+            fprintf(stdout, "%5d ", *(stack + i));
+    }
+
+    putchar('\n');
+}
+
+short is_opening_char(int c, short prev_quot) {
+    if ((c == '"' && prev_quot != 2)
+            || (c == '\'' && prev_quot != 1)
+            || c == '('
+            || c == '{'
+            || c == '['
+            || c == '<') {
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+short is_closing_char(int c, short prev_quot) {
+
+    if (('"' == c && 2 == prev_quot)
+            || ('\'' == c && 1 == prev_quot)
+            || ')' == c
+            || '}' == c
+            || ']' == c
+            || '>' == c) {
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+short is_match(int opening, int closing) {
+    if ((('"' == opening || '\'' == opening) && closing == opening)
+            || (')' == opening && closing == '(')
+            || ('}' == opening && closing == '{')
+            || (']' == opening && closing == '[')
+            || ('>' == opening && closing == '<')) {
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void print_error(int unmatched, int lnum) {
+    fprintf(stdout, "Error: unmatched %c on line %d.\n", unmatched, lnum);
+}
+----
+link:./exercises/chap01/24-check-syntax.c[./exercises/chap01/24-check-syntax.c]
+
+
+
+
+== [6/12] CHAPTER 2: Types, Operators, and Expressions ==
+Words like short or long are known as 'quilifiers'.
+
+
+=== 2.1 Variable Names ===
+
+
+
+=== 2.2 Data Types and Sizes ===
+
+
+
+=== Exercise 01 - limits ===
+[source,c,lineos]
+----
+// Exercise 2-1. Write a program to determine the ranges of char , short , int,
+// and long variables, both signed and unsigned , by printing appropriate
+// values from standard headers and by direct computation. Harder if you
+// compute them: determine the ranges of the various floating-point types.
+
+// Various floating point types:
+//   - float
+//   - double
+//   - long double
+
+
+#include <stdio.h>
+#include <limits.h>
+#include <float.h>
+
+int main(void)
+{
+    printf("%25s: %20d, %25s: %20d\n", "unsigned char min", 0, "unsigned char min", UCHAR_MAX);
+    printf("%25s: %20d, %25s: %20d\n", "signed char max", SCHAR_MIN, "signed char min", SCHAR_MAX);
+
+    printf("%25s: %20d, %25s: %20d\n", "unsigned int min", 0, "unsigned int max", UINT_MAX);
+    printf("%25s: %20d, %25s: %20d\n", "signed int min", INT_MIN, "signed int max", INT_MAX);
+
+    printf("%25s: %20ld, %25s: %20ld\n", "unsinged long min", 0L, "unsigned long max", ULONG_MAX);
+    printf("%25s: %20ld, %25s: %20ld\n", "signed long min", LONG_MIN, "signed long max", LONG_MAX);
+
+    printf("%25s: %20e, %25s: %20e\n", "signed float min", FLT_MIN, "signed long max", FLT_MAX);
+    printf("%25s: %20e, %25s: %20e\n", "signed double min", DBL_MIN, "signed double max", DBL_MAX);
+    printf("%25s: %20Le, %25s: %20Le\n", "signed long double min", LDBL_MIN, "signed double max", LDBL_MAX);
+
+    return 0;
+}
+----
+link:./exercises/chap02/01-limits.c[./exercises/chap02/01-limits.c]
+
+
+
+=== 2.3 Constants and Enums ===
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int my_strlen(char*);
+
+int main(void)
+{
+    fprintf(stdout, "%d\n", my_strlen("Linux"));    // 5
+    fprintf(stdout, "%d\n", my_strlen("ção"));      // 5
+    fprintf(stdout, "%d\n", my_strlen("@#$%/\\"));  // 6
+
+    return 0;
+}
+
+int my_strlen(char* str)
+{
+    int i = 0;
+
+    while (*(str + i) != '\0')
+        ++i;
+
+    return i;
+}
+----
+link:./examples/chap02/01-strlen.c[./examples/chap02/01-strlen.c]
+
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int my_strlen(char*);
+
+int main(void)
+{
+    enum mybool { NO, YES };
+
+    enum escapes {
+        BELL = '\a',
+        BACKSPACE = '\b',
+        TAB = '\t',
+        NEWLINE = '\n',
+        VTAB = '\v',
+        RETURN = '\r'
+    };
+
+    enum months {
+        JAN = 1, FEB, MAR, APR, MAY, JUN,
+        JUL, AUG, SEP, OCT, NOV, DEC};
+    // FEB = 2, MAR = 3, etc.
+
+    // Wee need enum mybool again to create a variable.
+    enum mybool flag = YES;
+
+    if (flag == YES) {
+        fprintf(stdout, "MAR: %d, DEC: %d%c", MAR, DEC, NEWLINE);
+    }
+
+    return 0;
+}
+----
+link:./examples/chap02/02-enums.c[./examples/chap02/02-enums.c]
+
+
+
+=== 2.4 Declarations ===
+
+
+=== 2.5 Arithmetic Operators ===
+
+==== Example Leap Years and Enums ====
+[source,c,lineos]
+----
+/**
+ * We took the leap year and ‘remainder’ operator explanation
+ * and created this program and used enums as well just to practice.
+ *
+ * Test it like this:
+ *
+ *   $ for year in {1900..2020} ; do ./devel "$year" ; done
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+enum mybool { NO, YES };
+
+enum mybool is_leap_year(int year);
+
+int main(int argc, char *argv[])
+{
+    int year;
+
+    if (argc != 2) {
+        fprintf(stderr, "You need to pass the year number.\n");
+        return 1;
+    }
+
+    // Assume the input is an integer.
+    year = atoi(*(argv + 1));
+
+    if (is_leap_year(year)) {
+        fprintf(stdout, "%d is a leap year!\n", year);
+    }
+    else {
+        fprintf(stdout, "%d is not a leap year...\n", year);
+    }
+
+    return 0;
+}
+
+enum mybool is_leap_year(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+        ? YES
+        : NO;
+}
+----
+link:./examples/chap02/03-leap-year-enums.c[./examples/chap02/03-leap-year-enums.c]
+
+
+
+=== 2.6 Relational and Logical Operators ===
+
+==== Exercise 02 loop no ANDs and ORs ====
+[source,c,lineos]
+----
+// Exercise 2-2. Write a loop equivalent to the for loop above without
+// using && or ||.
+
+#include <stdio.h>
+
+int main(void)
+{
+    int i, c, lim;
+    lim = 50;
+    char s[50];
+
+    //for (i = 0; i < lim - 1 && (c = getchar()) != '\n' && c != EOF; ++i)
+    //    s[i] = c;
+
+    i = 0;
+    while (i < lim - 1) {
+        if ((c = getchar()) == '\n') {
+            break;
+        }
+
+        if (c == EOF) {
+            break;
+        }
+
+        s[i++] = c;
+    }
+
+    s[i] = '\0';
+
+    printf("[%s]\n", s);
+
+    return 0;
+}
+----
+link:./exercises/chap02/02-loop-no-ands-ors.c[./exercises/chap02/02-loop-no-ands-ors.c]
+
+
+
+=== 2.7 Type Conversions ===
+
+==== Example atoi ====
+We added some checking to convert negative numbers as well.
+
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int myatoi(char s[]);
+
+int main(int argc, char **argv)
+{
+    printf("Sum of %s an %s is %d\n",
+            argv[1], argv[2], myatoi(argv[1]) + myatoi(argv[2]));
+
+    return 0;
+}
+
+int myatoi(char s[])
+{
+    int i, acc, sign_factor;
+
+    acc = 0;
+    i = 0;
+    sign_factor = 1;
+
+    if (s[0] == '-') {
+        sign_factor = -1;
+        i = 1;
+    }
+
+    for ( ; s[i] >= '0' && s[i] <= '9'; ++i)
+        acc = 10 * acc + (s[i] - '0');
+
+    return acc * sign_factor;
+}
+----
+link:./examples/chap02/04-atoi.c[./examples/chap02/04-atoi.c]
+
+
+
+==== Example case conversion ====
+[source,c,lineos]
+----
+#include <stdio.h>
+
+int mylower(int c);
+int myupper(int c);
+
+int main(void)
+{
+    int c;
+
+    while ((c = getchar()) != EOF) {
+        //putchar(mylower(c));
+        putchar(myupper(c));
+    }
+    return 0;
+}
+
+int mylower(int c)
+{
+    if (c >= 'A' && c <= 'Z')
+        return c + 'a' - 'A';
+
+    return c;
+}
+
+int myupper(int c)
+{
+    if (c >= 'a' && c <= 'z')
+        return c - ('a' - 'A');
+
+    return c;
+}
+----
+link:./examples/chap02/05-case-conv.c[./examples/chap02/05-case-conv.c]
+
+
+==== Example Pseudo-Rrand ====
+[source,c,lineos]
+----
+#include <stdio.h>
+
+unsigned long int next = 1;
+
+int myrand(int lim);
+void mysrand(unsigned int seed);
+
+int main(void)
+{
+
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+    printf("Random num: %d\n", myrand(5));
+
+    return 0;
+}
+
+int myrand(int lim)
+{
+    next = next * 1103515245 + 12345;
+    return (unsigned int) (next / 65536) % lim;
+}
+
+void mysrand(unsigned int seed)
+{
+    next = seed;
+}
+----
+link:./examples/chap02/06-pseudo-rand.c[./examples/chap02/06-pseudo-rand.c]
+
+
+==== Exercise 3 - htoi
+
+
+link:./exercises/chap02/03-htoi.c[./exercises/chap02/03-htoi.c]
+
+[source,c,lineos]
+----
+include::./exercises/chap02/03-htoi.c[]
+----
+
+
+=== 2.8 Increment and Decrement Operators
+
+TODO Squeeze example missing, increment numbers.
+
+==== Exercise 4, sequeeze s2 from s1
+
+[source,c,lineos]
+----
+include::./exercises/chap02/04-squeeze.c[]
+----
+
+==== Exercise 5, any
+
+[source,c,lineos]
+----
+include::./exercises/chap02/05-any.c[]
+----
+
+== 2.9 Bitwise Operators
+
+    n = 5
+    n = n & 0177
+    00000000 00000000 00000000 00000101    n
+&
+    00000000 00000000 00000000 01111111    0177
+---------------------------------------
+    00000000 00000000 00000000 00000101    original n
+
+
+    n = 037777777741
+    k = 0177
+    00000000 00000000 11111111 11100001    n
+&
+    00000000 00000000 00000000 01111111    0177
+---------------------------------------
+    00000000 00000000 00000000 01100001    n becomes 01100001
+
+Changes the first bit of the last octet from 1 to zero because the octal used in the bitewise and operation takes 7 bits, not 8.
+
+=== getbits
+
+link:./examples/chap02/07-getbits.c[./examples/chap02/07-getbits.c]
+
+[source,c,lineos]
+----
+include::./examples/chap02/07-getbits.c[]
+----
+
+==== Exercises
+
+===== Exercise 6 - setbits
+
+Write a function setbits(x, pos, len, y) that returns x with the n bits that begin at position p set to the rightmost n bits of y , leaving the other bits unchanged.
+
+    // The rightmost bit is at position zero.
+    x = 1010 1010
+             --
+    pos = 3; len = 2
+    y = 0001 0110
+               --
+             ^
+             12
+    -------------
+        1010 1110
+        // Positions 3 and 2 in x were set to 11 because 11 are the
+        // n (2) rightmost bits in y.
+
+Implement this exercise.
+
+===== invert bits at specific positions
+
+[source,c,lineos]
+----
+include::./exercises/chap02/06-setbits.c[]
+----
+
+
+== End
+
+++++
+<style type='text/css'>
+#toc ul { list-style-type: circle }
+pre, pre > code { font-family: 'Source Code Pro', 'Ubuntu Mono', 'Anonymous Pro', monospace; }
+.listingblock .pygments .tok-c1, .listingblock .pygments .tok-cm { font-style: normal; }
+ul > li p { margin-bottom: 0; }
+</style>
+++++

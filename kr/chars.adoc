@@ -1,0 +1,21 @@
+== C, digits
+
+In C, 48 and 57 are the internal representation of '0' and '9' respectively.
+To test whether a character is a number (between 0 and 9), we can do:
+
+    if (chr >= 48 && chr <= 57)
+        // Then chr is a digit.
+
+
+Or we can do:
+
+    if (chr >= '0' && chr <= '9')
+        // Then chr is a digit.
+
+
+'0' →  48, '9' →  57
+
+
+image:imgs/001/c-digit-internal-value.png[]
+
+

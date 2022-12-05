@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ERR_NONE	devel.c	19;"	d	file:
+ERR_UNMATCHED_BRACKET	devel.c	20;"	d	file:
+FALSE	devel.c	12;"	d	file:
+MAXLINELEN	devel.c	9;"	d	file:
+STACKSIZE	devel.c	10;"	d	file:
+TRUE	devel.c	13;"	d	file:
+TYPE_CMT_MULTI	devel.c	17;"	d	file:
+TYPE_CMT_NONE	devel.c	15;"	d	file:
+TYPE_CMT_SINGLE	devel.c	16;"	d	file:
+check	devel.c	/^short check(char c, char* stk_chars, char* stk_lnum, short lnum) {$/;"	f
+check_comment_end	devel.c	/^short check_comment_end(char* line, short type_cmt)$/;"	f
+check_comment_multi_end	devel.c	/^short check_comment_multi_end(char* line)$/;"	f
+check_comment_single_end	devel.c	/^short check_comment_single_end(char* line)$/;"	f
+check_comment_start	devel.c	/^short check_comment_start(char* line)$/;"	f
+check_string_delimiter	devel.c	/^short check_string_delimiter(char* line)$/;"	f
+is_closing_bracket	devel.c	/^short is_closing_bracket(char c, char* stk_chars)$/;"	f
+is_closing_dq	devel.c	/^short is_closing_dq(char c, char* stk)$/;"	f
+is_closing_pair	devel.c	/^short is_closing_pair(char c, char* stk_chars)$/;"	f
+is_closing_sq	devel.c	/^short is_closing_sq(char c, char* stk)$/;"	f
+is_opening_dq	devel.c	/^short is_opening_dq(char c, char* stk)$/;"	f
+is_opening_pair	devel.c	/^short is_opening_pair(char c, char* stk_chars) {$/;"	f
+is_opening_sq	devel.c	/^short is_opening_sq(char c, char* stk)$/;"	f
+main	devel.c	/^int main(void)$/;"	f
+pop	devel.c	/^char pop(char* stack)$/;"	f
+print_stack	devel.c	/^void print_stack(char* stack, short type)$/;"	f
+push	devel.c	/^char push(char c, char* stack)$/;"	f
+top	devel.c	/^char top(char* stack)$/;"	f

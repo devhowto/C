@@ -1,0 +1,4 @@
+
+sum($num++); // argument cannot be an expression
+
+sum(++$num); // OK

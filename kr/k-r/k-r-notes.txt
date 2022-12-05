@@ -1,0 +1,232 @@
+= The C Programming Language
+:source-highlighter: pygments
+:pygments-css: class
+:source-language: ruby
+:toc: left
+:sectlinks:
+:webfonts!:
+
+Compile:
+
+    gcc -std=c89 -Wall -pedantic program.c -o bin/program
+
+
+== #1 - A Tutorial Introduction
+
+`main` is the special function, you know... It boots the program for you.
+
+`#include <stdio.h>` tells the compiler to include standard library for I/O.
+
+
+`\n` represents one single character and it is called a _escape sequence_.
+\" escapes " and \\ escapes \.
+
+`\b` moves the “pointer head” back. If you do:
+
+    printf("hey\b\b");
+
+the pointer head is on "e", meaning next printings will start from where "e" is.
+`\b` is not the same as the backspace in modern applications where it erases chars
+on the left. In C, `\b` only moves the printing pointer to earlier positions.
+
+Comments may appear anywhere where a blank, tab or newline can.
+
+Variables must be declared before they can be used.
+
+A declaration announces the properties of variables.
+
+Types `char`, `short`, `int`, `long`, `float`, `double`. Their sizes are
+machine-dependant.
+
+There are also `arrays`, `structures`and `unions` of these basic types,
+`pointers` to them and `functions` that return them.
+
+
+
+Declaration statements vs assignment statements.
+
+Integer division truncates (fractional part is discarded): 11 / 2 is 5, not 5.5.
+
+
+With printf, `%d` specifies integers.
+
+`printf` is not part of C (C doesn’t have I/O built-in). printf is part of the
+standard Input and Output library.
+
+Right align digits by padding a certain “width” with spaces:
+
+    printf("%3d\t%6d\n", fahr, celsius);        // ints
+    printf("%3.0f\t%6.1f\n", fahr, celsius);    // floats
+
+
+Arithmetic with integers cause integer operations to be performed. If at least
+one operand is a floating-point, then the integer operand is converted to a
+floating-point before the operation is done. This applies to comparisons as
+well: `(someFloat < someInt)` means that someInt is converted to a float before
+the comparison takes place.
+
+    #define SOMENAME SOME_VALUE
+    #define SIZE 50
+    #define NAME "Luke"
+
+Note that there is neither `=` nor `;`. If you mistakenly add a “;” at the end of the line, it becomes part of the value and will cause problems when compiling.
+
+
+== Character Input and Output
+
+`getchar`, `putchar`.
+
+`putchar(my_char)` prints the _integer value_ of `my_char` as a character, just as `printf("%c", my_char)` does.
+
+`!=` and `==` (among others) are the _relational operators_.
+
+The type `char` is not big enough to store `EOF` (end of file). `int` is.
+
+`!=` has higher precedence than that of `=`, thus the extra parens in:
+
+    while ((my_char = getchar()) != EOF)...
+           ^                   ^
+
+That is,
+
+    my_char = getchar() != EOF
+
+is the same as
+
+    my_char = (getchar() != EOF)
+
+
+0 is falsy, and 1 is truty.
+
+    printf("%d\n", 5 == 5);  // 1 because truthy is 1
+    printf("%d\n", 10 > 11); // 0 because falsy is 0
+
+[source,c,lineos]
+----
+short num = 0;
+
+while (1) {
+    if (num == 5) break;
+    printf("%hd\n", num++);
+}
+----
+
+
+http://stackoverflow.com/questions/28189537/kr-1-7-is-it-solvable-by-using-putchar-instead-of-printf
+
+`%ld` prints _long integer_.
+
+`%f` is used to print both floats and doubles.
+
+The *null statement* is necessary in the next example because the grammer of C demands that a `for` loop have a body.
+
+
+[source,c,lineos]
+----
+/* Count characters in input. v2. */
+
+int main(void)
+{
+    double nc;
+
+    for (nc = 0; getchar() != EOF; ++nc)
+        ;
+
+    puts nc;
+
+    return 0;
+}
+----
+
+=== Character Constants
+
+A character written between single quotes represents an integer value equal to the numerical value of the character in the machine's character set. This is called a character constant, although it is just another way to write a small integer. So, for example, `'A'` is a character constant; in the ASCII character set its value is 65, the internal representation of the character ‘A’ . Of course, `'A'` is to be preferred over 65 : its meaning is obvious, and it is independent of a particular character set.
+
+The escape sequences used in string constants are also legal in character constants, so `'\n'` stands for the value of the newline character, which is 10 in ASCII. You should note carefully that `'\n'` is a single character, and in expressions is just an integer; on the other hand, `'\n'` is a string constant that happens to contain only one character.
+
+
+----
+// If `c` is a digit.
+if (c >= '0' && c <= '9')
+    ++ndigit[c - '0'];
+----
+
+0 and 9 entered from the keyboard are stored as represented internally as 48 and 57. 0 is 48, 9 is 57.
+
+    echo -n 0 | od -An -t d1
+       48
+    echo -n 9 | od -An -t d1
+       57
+
+Standard library → text → stream → sequence of chars → lines (newlines). Counting lines is counting newlines.
+
+Careful not too use a single “=” when you really mean to use two of them. = vs ==.
+
+`if (chr = '\n')` is valid and always true. You really want `if (chr == '\n')`.
+
+=== 1.6 Arrays
+
+“A character written between single quotes represents an integer value equal to the numerical
+value of the character in the machine's character set ('a' is 97, for instance. If you print 97 as decimal, it is well, 97, but if you print it as char, it is the letter “a”. This is called a character constant, although it is just another way to write a small number.”
+
+'A' is 65 (decimal) in ASCII (man ascii).  '\n' or '\t' are also character constants. They are written using two characters (e.g. “\t” and “\n”), but they represent a single character.
+
+
+Note that 'A' to 'Z', 'a' to 'z' and '0' to '9' have consecutive increasing values.
+
+`c = getchar()` and the user types 3. c then is '3', whose decimal value is 51. `c – '0'` is `51 – 48`, which is 3. It works for all digits. The numeric value of a digit is `c – '0'`.
+
+Anything between and including `c >= '0' && c <= '9'` means that c is a digit between 0 and 9. Note that `c >= 0 && c <= 9` is NOT the correct  way to test if c is a digit. 0 is the nul byte, and 9 is the the tab (`\t`) character (`man ascii` on your shell and remember that utf-8 is backward compatible with ascii). Again, 0 is not '0' and 9 is not '9'.
+
+NOTE: C has nothing to do with ASCII, but it just happens that those are the values in the ascii or utf-8 character sets.
+
+If c is a digit between 0 and 9, (48 and 57, internally), `arr[c – '0']` is a valid array subscript between `arr[0]` and `arr[9]`.
+
+
+=== 1.7 Functions
+
+With properly designed functions, it is possible to ignore _how_ a job is done; knowing _what_ is done is sufficient.
+
+Parameters to a function are local to that function.
+
+- _formal argument_ — argument in the function prototype and definition/declaration.
+- _actual argument_ — argument passed when actually calling a function.
+
+
+A function need not return a value; a return statement with no expression causes control, but no useful value, to be returned to the caller, as does ``falling off the end'' of a function by reaching the terminating right brace. And the calling function can ignore a value returned by a function.
+
+
+Parameter names in the prototype are optional. Only types are required.
+
+Function parameters are passed by value (by default), unless you pass the name of an array to a function, in which case, it becomes a pointer inside the function.
+
+A string like `"hey\n"` is actually stored as `'h', 'e', 'y', '\n', '\0'` to mark the end of the string.
+
+
+== Scope
+
+See these two examples:
+
+.for1
+[source,c,lineos]
+----
+for (short i = 0; i < 0; ++i)
+    ;
+printf("%hd\n", i); // Error about undeclared variable `i`.
+----
+
+.for2
+[source,c,lineos]
+----
+short j;
+for (j = 0; j < 0; ++j)
+    ;
+printf("%hd\n", j); // We are fine here.
+----
+
+That tells us that variables declared inside the parens in blocks like `for` and `while` are local to the block.
+
+
+
+
+
