@@ -38,8 +38,3 @@ int main ()
   return 0;
 }
 
-
-
-
-/* vim: set syntax=off filetype=text autoindent: */
-
