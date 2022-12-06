@@ -1,0 +1,8 @@
+#
+# .gitignore
+#
+
+#
+# Compiled C files.
+#
+outdir/
