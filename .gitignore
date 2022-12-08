@@ -6,3 +6,8 @@
 # Compiled C files.
 #
 outdir/
+
+#
+# Clang stuff.
+#
+*.dSYM
