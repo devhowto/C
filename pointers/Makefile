@@ -1,17 +1,14 @@
 CC=gcc
 CFLAGS=-std=c99 -Wall -pedantic -g
 
-outdir:
-	mkdir -pv ./outdir
-
 ##
 # Run like:
 #
 #   $ make outdir/foo
 #
-outdir/%: %.c
-	mkdir -pv outdir
+out/%: %.c
+	mkdir -pv out
 	$(CC) $(CFLAGS) $< -o $@
 
 clear:
-	rm -v ./outdir/*
+	rm -v ./out/*
