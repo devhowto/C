@@ -2,10 +2,12 @@
 # .gitignore
 #
 
+##
+# C compiled stuff beacuse I generally compile C code onto
+# some `out/` directories so the executables are easily cleaned
+# up without mixing too much with the `.{c.h}` files.
 #
-# Compiled C files.
-#
-outdir/
+out
 
 #
 # Clang stuff.
