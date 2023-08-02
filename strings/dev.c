@@ -1,8 +1,11 @@
 #include <stdio.h>
 
-int main ()
-{
-  char s[4] = { 'F', 'o', 'o', '!', '\0' };
+void skip(const char *s) {
+  puts(s + 6);
+  printf("%s\n", s + 6);
+}
 
-  printf("%s\n", s);
+int main() {
+  char *msg = "Don't call me.";
+  skip(msg);
 }

@@ -1,17 +1,17 @@
 CC=gcc
 CFLAGS=-std=c99 -Wall -pedantic -g
 
-outdir:
-	mkdir -pv ./outdir
+out:
+	mkdir -pv ./out
 
 
 ##
 # Run like:
 #
-#   $ make outdir/ex01ptr
-#   $ make outdir/doses
+#   $ make out/ex01ptr
+#   $ make out/doses
 #   $ make buf_fgets
 #
-outdir/%: %.c
+out/%: %.c
 	$(CC) $(CFLAGS) $< -o $@
 

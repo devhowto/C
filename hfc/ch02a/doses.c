@@ -4,7 +4,7 @@ int main ()
 {
   short doses[] = {1, 3, 2, 1000};
 
-  fprintf (stdout, "%hi\n", 3[doses]);
+  fprintf(stdout, "%hi\n", 3[doses]);
   // →  1000
 
   return 0;
