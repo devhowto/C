@@ -1,3 +1,3 @@
-= My Stupendous Project
+= C Programming Language
 
-Intro to my stupendous project.
+NOTE: I'm porting my notes and solutions from previous C studies into this project.
